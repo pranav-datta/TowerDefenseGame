@@ -15,7 +15,7 @@ public class Controller extends Application {
     private Stage primaryStage;
     private Player player;
     private WelcomeScreen welcome;
-    private IntialConfigurationScreen config;
+    private InitialConfigurationScreen config;
     private boolean saved;
 //    private EndGameUI endGameUI;
 
@@ -60,7 +60,7 @@ public class Controller extends Application {
      * Transitions from Welcome Screen to Config screen
      */
     public void startConfigUI() {
-        config.createPlayer(primaryStage);
+        config.initializeGame(primaryStage);
         saved = false;
     }
 
@@ -72,17 +72,17 @@ public class Controller extends Application {
 //        endGameUI.start(primaryStage);
 //    }
 
-    /**
-     * Saves the game
-     *
-     * @throws Exception if stage can't launch correctly
-     */
-    public void save() {
-        saved = true;
-        primaryStage.hide();
-        welcome = new WelcomeScreen(this);
-        welcome.start(primaryStage);
-    }
+//    /**
+//     * Saves the game
+//     *
+//     * @throws Exception if stage can't launch correctly
+//     */
+//    public void save() {
+//        saved = true;
+//        primaryStage.hide();
+//        welcome = new WelcomeScreen(this);
+//        welcome.start(primaryStage);
+//    }
 
     /**
      * Getter for saved

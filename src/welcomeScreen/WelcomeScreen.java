@@ -69,9 +69,9 @@ public class WelcomeScreen extends Application {
 
         Button welcomeButton = new Button("Click to Start");
         welcomeButton.setOnAction(e -> {
-            InitialConfigurationScreen config = new InitialConfigurationScreen();
+            InitialConfigurationScreen config = new InitialConfigurationScreen(controller);
             stage.hide();
-            config.createPlayer();
+            config.initializeGame(stage);;
         });
 
         root.setTop(welcomeLabel);
@@ -98,6 +98,4 @@ public class WelcomeScreen extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-}
-
 }

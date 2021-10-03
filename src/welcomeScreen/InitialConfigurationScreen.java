@@ -106,7 +106,7 @@ public class InitialConfigurationScreen {
                             !name.getText().trim().isEmpty() && level != null) {
                         entryIsValid.set(true);
                         controller.createPlayer(name.getText(), level);
-                        controller.startInitialGameScreen();
+//                        controller.startInitialGameScreen();
                     } else {
                         Alert configAlert = new Alert(Alert.AlertType.ERROR);
                         configAlert.getDialogPane().setPrefSize(450, 150);
