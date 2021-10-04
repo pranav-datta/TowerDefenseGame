@@ -75,9 +75,9 @@ public class Player {
     }
 
     /**
-     * Getter for difficulty.
+     * Getter for level.
      *
-     * @return  player's difficulty level.
+     * @return  player's level.
      */
     public Level getLevel() {
         return level;

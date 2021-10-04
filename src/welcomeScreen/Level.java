@@ -1,7 +1,7 @@
 package welcomeScreen;
 
 /**
- * Enumerated type Difficulty to track what difficulty the
+ * Enumerated type Level to track what level the
  * player chooses.
  * @author Olaolu Dada
  * @version 1.0
