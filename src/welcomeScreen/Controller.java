@@ -1,4 +1,4 @@
-package welcomeScreen;
+package welcomescreen;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -17,7 +17,7 @@ public class Controller extends Application {
     private WelcomeScreen welcome;
     private InitialConfigurationScreen config;
     private boolean saved;
-//    private EndGameUI endGameUI;
+    //private EndGameUI endGameUI;
 
     /**
      * Constructor for the Controller.Controller class.
@@ -35,7 +35,9 @@ public class Controller extends Application {
     /**
      * No-arg constructor for the Controller.Controller class
      */
-    public Controller() {}
+    public Controller() {
+
+    }
 
     /**
      * Creates a player object based on user input
@@ -64,31 +66,31 @@ public class Controller extends Application {
         saved = false;
     }
 
-//    /**
-//     * Shows the game over screen
-//     */
-//    public void end() {
-//        primaryStage.hide();
-//        endGameUI.start(primaryStage);
-//    }
+    ///**
+    // * Shows the game over screen
+    // */
+    //public void end() {
+    //    primaryStage.hide();
+    //    endGameUI.start(primaryStage);
+    //}
 
-//    /**
-//     * Saves the game
-//     *
-//     * @throws Exception if stage can't launch correctly
-//     */
-//    public void save() {
-//        saved = true;
-//        primaryStage.hide();
-//        welcome = new WelcomeScreen(this);
-//        welcome.start(primaryStage);
-//    }
+    ///**
+    // * Saves the game
+    // *
+    // * @throws Exception if stage can't launch correctly
+    // */
+    //public void save() {
+    //    saved = true;
+    //    primaryStage.hide();
+    //    welcome = new WelcomeScreen(this);
+    //    welcome.start(primaryStage);
+    //}
 
-    /**
-     * Getter for saved
-     *
-     * @return true if game is saved.
-     */
+    ///**
+    // * Getter for saved
+    // *
+    // * @return true if game is saved.
+    // */
 
     @Override
     public void start(Stage stage) throws Exception {

@@ -1,4 +1,4 @@
-package welcomeScreen;
+package welcomescreen;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,7 +12,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * @author Eric Shavkin, Olaolu Dada, Pranav Datta
  * @version 1.0
- * This class is the initial configuration screen accessed by starting the game from the welcome screen
+ * This class is the initial configuration screen
+ * accessed by starting the game from the welcome screen
  */
 public class InitialConfigurationScreen {
     private Controller controller;
@@ -24,7 +25,7 @@ public class InitialConfigurationScreen {
      * Constructor for the initial configuration screen
      * @param controller Controller object that controls the movement between screens
      */
-    public InitialConfigurationScreen (welcomeScreen.Controller controller) {
+    public InitialConfigurationScreen(Controller controller) {
         this.controller = controller;
         this.label = new Label("Configuration Screen");
     }
@@ -99,11 +100,11 @@ public class InitialConfigurationScreen {
         while (!entryIsValid.get()) {
             dialogBox.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
-                    if (name.getText() != null && name.getText().length() > 0 &&
-                            !name.getText().trim().isEmpty() && level != null) {
+                    if (name.getText() != null && name.getText().length() > 0
+                            && !name.getText().trim().isEmpty() && level != null) {
                         entryIsValid.set(true);
                         controller.createPlayer(name.getText(), level);
-//                      controller.startInitialGameScreen();
+                        //controller.startInitialGameScreen();
                     } else {
                         Alert configAlert = new Alert(Alert.AlertType.ERROR);
                         configAlert.getDialogPane().setPrefSize(450, 150);

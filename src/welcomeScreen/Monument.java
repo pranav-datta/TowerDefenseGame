@@ -1,4 +1,4 @@
-package welcomeScreen;
+package welcomescreen;
 /**
  * Monument class to encapsulate monument's data.
  * @author Olaolu Dada

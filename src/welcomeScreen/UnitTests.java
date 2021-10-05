@@ -1,4 +1,4 @@
-package welcomeScreen;
+package welcomescreen;
 
 import javafx.stage.Stage;
 import org.junit.Test;
@@ -10,13 +10,13 @@ import static org.testfx.api.FxAssert.verifyThat;
 public class UnitTests extends ApplicationTest {
 
     @Override
-    public void start(Stage stage) throws Exception{
+    public void start(Stage stage) throws Exception {
         WelcomeScreen welcome = new WelcomeScreen();
         welcome.start(stage);
     }
 
     @Test
-    public void TestInitialScreen() {
+    public void testInitialScreen() {
         clickOn("Click to Start");
         verifyThat("Configuration Screen", NodeMatchers.isNotNull());
     }

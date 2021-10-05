@@ -1,4 +1,4 @@
-package welcomeScreen;
+package welcomescreen;
 
 /**
  * Player class to encapsulate player's data.
@@ -18,8 +18,8 @@ public class Player {
      * and difficulty to easy.
      */
     public Player() {
-        this("George P. Burdell", welcomeScreen.Level.EASY);
-        this.monument = new Monument(welcomeScreen.Level.EASY);
+        this("George P. Burdell", Level.EASY);
+        this.monument = new Monument(Level.EASY);
     }
 
     /**
@@ -27,11 +27,11 @@ public class Player {
      * Automatically sets money to 0, monument to strong,
      * and difficulty to easy.
      *
-     * @param name
+     * @param name name of player
      */
     public Player(String name) {
-        this(name, welcomeScreen.Level.EASY);
-        this.monument = new Monument(welcomeScreen.Level.EASY);
+        this(name, Level.EASY);
+        this.monument = new Monument(Level.EASY);
     }
 
     /**
@@ -44,15 +44,15 @@ public class Player {
     public Player(String name,  Level level) {
         this.name = name;
         this.level = level;
-        if (level == welcomeScreen.Level.EASY) {
+        if (level == Level.EASY) {
             money = 500;
-            this.monument = new Monument(welcomeScreen.Level.EASY);
-        } else if (level == welcomeScreen.Level.INTERMEDIATE) {
+            this.monument = new Monument(Level.EASY);
+        } else if (level == Level.INTERMEDIATE) {
             money = 250;
-            this.monument = new Monument(welcomeScreen.Level.INTERMEDIATE);
+            this.monument = new Monument(Level.INTERMEDIATE);
         } else {
             money = 150;
-            this.monument = new Monument(welcomeScreen.Level.HARD);
+            this.monument = new Monument(Level.HARD);
         }
     }
 
@@ -87,6 +87,8 @@ public class Player {
      * Getter for monument.
      * @return  player's monument object.
      */
-    public Monument getMonument() { return monument; }
+    public Monument getMonument() {
+        return monument;
+    }
 
 }

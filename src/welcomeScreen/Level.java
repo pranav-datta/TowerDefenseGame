@@ -1,4 +1,4 @@
-package welcomeScreen;
+package welcomescreen;
 
 /**
  * Enumerated type Level to track what level the

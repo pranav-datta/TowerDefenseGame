@@ -1,4 +1,4 @@
-package welcomeScreen;
+package welcomescreen;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  * @version 1.0
  */
 public class WelcomeScreen extends Application {
-    private welcomeScreen.Controller controller;
+    private Controller controller;
     private Stage stage;
 
     /**
@@ -26,7 +26,7 @@ public class WelcomeScreen extends Application {
      *
      * @param controller the controller object
      */
-    public WelcomeScreen(welcomeScreen.Controller controller) {
+    public WelcomeScreen(Controller controller) {
         this.controller = controller;
     }
 
@@ -66,7 +66,7 @@ public class WelcomeScreen extends Application {
         welcomeButton.setOnAction(e -> {
             InitialConfigurationScreen config = new InitialConfigurationScreen(controller);
             stage.hide();
-            config.initializeGame(stage);;
+            config.initializeGame(stage);
         });
 
         root.setTop(welcomeLabel);
