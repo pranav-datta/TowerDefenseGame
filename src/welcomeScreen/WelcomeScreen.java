@@ -7,12 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -23,7 +18,7 @@ import javafx.stage.Stage;
  * @version 1.0
  */
 public class WelcomeScreen extends Application {
-    private Controller controller;
+    private welcomeScreen.Controller controller;
     private Stage stage;
 
     /**
@@ -31,7 +26,7 @@ public class WelcomeScreen extends Application {
      *
      * @param controller the controller object
      */
-    public WelcomeScreen(Controller controller) {
+    public WelcomeScreen(welcomeScreen.Controller controller) {
         this.controller = controller;
     }
 

@@ -2,12 +2,7 @@ package welcomeScreen;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -15,7 +10,7 @@ import javafx.stage.Stage;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * @author Eric Shavkin, Olaolu Dada
+ * @author Eric Shavkin, Olaolu Dada, Pranav Datta
  * @version 1.0
  * This class is the initial configuration screen accessed by starting the game from the welcome screen
  */
@@ -23,13 +18,15 @@ public class InitialConfigurationScreen {
     private Controller controller;
     private Level level;
     private Stage mainStage;
+    private Label label;
 
     /**
      * Constructor for the initial configuration screen
      * @param controller Controller object that controls the movement between screens
      */
-    public InitialConfigurationScreen (Controller controller) {
+    public InitialConfigurationScreen (welcomeScreen.Controller controller) {
         this.controller = controller;
+        this.label = new Label("Configuration Screen");
     }
 
     /**
@@ -92,7 +89,7 @@ public class InitialConfigurationScreen {
         levelBox.setSpacing(10);
         levelBox.getChildren().addAll(easy, intermediate, hard);
 
-        VBox root = new VBox();
+        VBox root = new VBox(label);
         root.getChildren().addAll(nameBox, levelBox);
 
         Scene scene = new Scene(root, 700, 380);

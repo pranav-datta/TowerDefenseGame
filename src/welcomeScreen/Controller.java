@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 /**
  * A Controller class that handles flow between
  * different screens in the Application.
- * @author Olaolu Dada
+ * @author Olaolu Dada, Pranav Datta
  * @version 1.0
  */
 
@@ -91,7 +91,7 @@ public class Controller extends Application {
      */
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws Exception {
         this.primaryStage = stage;
     }
 

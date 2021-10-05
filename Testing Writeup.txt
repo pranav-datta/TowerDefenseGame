@@ -1,0 +1,4 @@
+Testing Writeup:
+
+Pranav:
+Tested Welcome Screen button to make sure it took the user to the Initial Configuration Screen. The test clicks on the "Click to Start" button and verifies the next page is the Configuration Screen page.

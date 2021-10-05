@@ -18,8 +18,8 @@ public class Player {
      * and difficulty to easy.
      */
     public Player() {
-        this("George P. Burdell", Level.EASY);
-        this.monument = new Monument(Level.EASY);
+        this("George P. Burdell", welcomeScreen.Level.EASY);
+        this.monument = new Monument(welcomeScreen.Level.EASY);
     }
 
     /**
@@ -30,8 +30,8 @@ public class Player {
      * @param name
      */
     public Player(String name) {
-        this(name, Level.EASY);
-        this.monument = new Monument(Level.EASY);
+        this(name, welcomeScreen.Level.EASY);
+        this.monument = new Monument(welcomeScreen.Level.EASY);
     }
 
     /**
@@ -44,15 +44,15 @@ public class Player {
     public Player(String name,  Level level) {
         this.name = name;
         this.level = level;
-        if (level == Level.EASY) {
+        if (level == welcomeScreen.Level.EASY) {
             money = 500;
-            this.monument = new Monument(Level.EASY);
-        } else if (level == Level.INTERMEDIATE) {
+            this.monument = new Monument(welcomeScreen.Level.EASY);
+        } else if (level == welcomeScreen.Level.INTERMEDIATE) {
             money = 250;
-            this.monument = new Monument(Level.INTERMEDIATE);
+            this.monument = new Monument(welcomeScreen.Level.INTERMEDIATE);
         } else {
             money = 150;
-            this.monument = new Monument(Level.HARD);
+            this.monument = new Monument(welcomeScreen.Level.HARD);
         }
     }
 
