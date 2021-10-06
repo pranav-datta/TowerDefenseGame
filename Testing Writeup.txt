@@ -2,3 +2,12 @@ Testing Writeup:
 
 Pranav:
 Tested Welcome Screen button to make sure it took the user to the Initial Configuration Screen. The test clicks on the "Click to Start" button and verifies the next page is the Configuration Screen page.
+
+Eric:
+Tested the Player constructor with two arguments, Name and Level. The test ensures that the Player is not equal to null and then goes attribute by attribute to ensure that the Player's attributes are what is expected (name, level, money, and monument health).
+
+Spancer:
+Tested Player one-argument constructor (just Name). This test ensures that the one-arg constructor for Player works like expected and has all the expected attributes, such as name, level, money, and monument health. Since the one-arg constructor does not have an option to set the Level, it is automatically set to Easy, so the test checks that the parameters are set accocrdingly.
+
+Laolu:
+Tested Player constructor and controller to make sure they work together as expected. First created a Player using the two-argument constructor and made sure all the attributes were set accordingly. Then created a Controller object and called its createPlayer method to create a Player that way. Went through the same process of checking the Player's attributes but did so through the Controller object and its getPlayer() method.
