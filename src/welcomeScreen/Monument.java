@@ -6,20 +6,26 @@ package welcomescreen;
  */
 public class Monument {
     private int health;
-    private Level level;
 
     /**
      * Constructor for Monument Class.
      * @param level represents level
      */
     public Monument(Level level) {
-        if (level == level.EASY) {
-            health = 500;
-        } else if (level == level.INTERMEDIATE) {
+        if (level == Level.EASY || level == null) {
+            this.health = 500;
+        } else if (level == Level.INTERMEDIATE) {
             health = 250;
         } else {
             health = 150;
         }
+    }
+
+    /**
+     * Constructor for Monument Class with no construcotr.
+     */
+    public Monument() {
+        this.health = 500;
     }
 
     /**

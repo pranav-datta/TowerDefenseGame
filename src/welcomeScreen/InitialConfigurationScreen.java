@@ -1,7 +1,6 @@
 package welcomescreen;
 
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -16,19 +15,18 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * accessed by starting the game from the welcome screen
  */
 public class InitialConfigurationScreen {
-    private Controller controller;
+    //private Controller controller;
     private Level level;
     private Stage mainStage;
-    private Label label;
 
-    /**
-     * Constructor for the initial configuration screen
-     * @param controller Controller object that controls the movement between screens
-     */
-    public InitialConfigurationScreen(Controller controller) {
-        this.controller = controller;
-        this.label = new Label("Configuration Screen");
-    }
+    ///**
+    // * Constructor for the initial configuration screen
+    // * @param controller Controller object that controls the movement between screens
+    // */
+    //public InitialConfigurationScreen(Controller controller) {
+    //    this.controller = controller;
+    //    this.label = new Label("Configuration Screen");
+    //}
 
     /**
      * Getter method for level
@@ -48,10 +46,10 @@ public class InitialConfigurationScreen {
 
     /**
      * Method that initializes the game where user sets the player name and level
-     * @param stage stage that is used to create the screen
+     * @param mainStage stage that is used to create the screen
      */
-    public void initializeGame(Stage stage) {
-        mainStage = stage;
+    public void initializeGame(Stage mainStage) {
+        this.mainStage = mainStage;
 
         Dialog dialogBox = new Dialog();
         dialogBox.setTitle("Initialize Game");
@@ -64,21 +62,22 @@ public class InitialConfigurationScreen {
         Label levelLabel = new Label("Game Level: ");
         Button easy = new Button("Easy");
         easy.setOnAction(event -> {
-            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            AlertBox.display("Selection","You have selected Easy difficulty!");
             level = Level.EASY;
         });
 
         Button intermediate = new Button("Intermediate");
         intermediate.setOnAction(event -> {
-            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            AlertBox.display("Selection","You have selected Intermediate difficulty!");
             level = Level.INTERMEDIATE;
         });
 
         Button hard = new Button("Hard");
         hard.setOnAction(event -> {
-            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            AlertBox.display("Selection","You have selected Hard difficulty!");
             level = Level.HARD;
         });
+        Label label = new Label("Configuration Screen");
 
         HBox nameBox = new HBox();
         nameBox.setAlignment(Pos.CENTER);
@@ -88,29 +87,35 @@ public class InitialConfigurationScreen {
         HBox levelBox = new HBox();
         levelBox.setAlignment(Pos.CENTER);
         levelBox.setSpacing(10);
-        levelBox.getChildren().addAll(easy, intermediate, hard);
+        levelBox.getChildren().addAll(levelLabel, easy, intermediate, hard);
 
         VBox root = new VBox(label);
         root.getChildren().addAll(nameBox, levelBox);
+        dialogBox.getDialogPane().setContent(root);
 
-        Scene scene = new Scene(root, 700, 380);
-        mainStage.setScene(scene);
-        mainStage.show();
         AtomicBoolean entryIsValid = new AtomicBoolean(false);
         while (!entryIsValid.get()) {
             dialogBox.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
-                    if (name.getText() != null && name.getText().length() > 0
-                            && !name.getText().trim().isEmpty() && level != null) {
+                    if (name.getText().length() > 0 && name.getText() != null
+                            && !name.getText().trim().isEmpty()) {
                         entryIsValid.set(true);
-                        controller.createPlayer(name.getText(), level);
-                        //controller.startInitialGameScreen();
+                        Controller control = null;
+                        try {
+                            control = new Controller(mainStage);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        control.createPlayer(name.getText(), level);
+                        control.startGameUI();
                     } else {
                         Alert configAlert = new Alert(Alert.AlertType.ERROR);
                         configAlert.getDialogPane().setPrefSize(450, 150);
                         configAlert.setTitle("Error");
                         configAlert.setHeaderText("Invalid Input!");
-                        configAlert.setContentText("Please input a valid name and select a level.");
+                        configAlert.setContentText("Please input a valid name. If you don't select a level, " +
+                                "it will default to easy.");
+                        level = null;
                         configAlert.showAndWait();
                     }
                 }

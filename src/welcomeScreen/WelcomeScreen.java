@@ -7,7 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -64,7 +69,7 @@ public class WelcomeScreen extends Application {
 
         Button welcomeButton = new Button("Click to Start");
         welcomeButton.setOnAction(e -> {
-            InitialConfigurationScreen config = new InitialConfigurationScreen(controller);
+            InitialConfigurationScreen config = new InitialConfigurationScreen();
             stage.hide();
             config.initializeGame(stage);
         });

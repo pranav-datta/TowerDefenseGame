@@ -14,9 +14,10 @@ import javafx.stage.Stage;
 public class Controller extends Application {
     private Stage primaryStage;
     private Player player;
-    private WelcomeScreen welcome;
     private InitialConfigurationScreen config;
     private boolean saved;
+    private WelcomeScreen welcome;
+    private InitialGameScreen game;
     //private EndGameUI endGameUI;
 
     /**
@@ -25,11 +26,12 @@ public class Controller extends Application {
      * @param primaryStage the main stage
      * @throws Exception if stage can't launch correctly
      */
-    public Controller(Stage primaryStage) {
+    public Controller(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         welcome = new WelcomeScreen(this);
-        config = new InitialConfigurationScreen(this);
-
+        config = new InitialConfigurationScreen();
+        game = new InitialGameScreen(this);
+        welcome.start(primaryStage);
     }
 
     /**
@@ -64,6 +66,13 @@ public class Controller extends Application {
     public void startConfigUI() {
         config.initializeGame(primaryStage);
         saved = false;
+    }
+
+    /**
+     * Starts the game screen
+     */
+    public void startGameUI() {
+        game.playGame(primaryStage);
     }
 
     ///**

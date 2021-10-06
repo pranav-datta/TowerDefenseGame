@@ -29,10 +29,9 @@ public class InitialGameScreen {
      * @param stage stage on which GUI is displayed
      */
     public void playGame(Stage stage) {
-        mainStage = stage;
-        mainStage.setTitle("*insert game name here*");
+        this.mainStage = stage;
 
-        Text moneyText = new Text("Total money: " + controller.getPlayer().getMoney());
+        Text moneyText = new Text("Total money: $" + controller.getPlayer().getMoney());
         Text pathText = new Text("The path that enemies will travel along will run from the "
                 + "left side of the screen to the right side of the screen, "
                 + "and will have many bends"
@@ -42,15 +41,16 @@ public class InitialGameScreen {
                 + "tower with a king at the top. It is made of stone, "
                 + "but has many flags and is very ornate.");
         Text monumentHealthText = new Text("Monument health: "
-                + controller.getPlayer().getMonument());
+                + controller.getPlayer().getMonument().getHealth());
 
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
         root.setSpacing(7.5);
         root.getChildren().addAll(moneyText, pathText, monumentText, monumentHealthText);
 
-        Scene scene = new Scene(root, 700, 380);
+        Scene scene = new Scene(root, 1000, 380);
         mainStage.setScene(scene);
+        mainStage.setTitle("*insert game name here*");
         mainStage.show();
     }
 }

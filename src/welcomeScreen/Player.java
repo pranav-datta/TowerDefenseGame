@@ -43,8 +43,7 @@ public class Player {
      */
     public Player(String name,  Level level) {
         this.name = name;
-        this.level = level;
-        if (level == Level.EASY) {
+        if (level == Level.EASY || level == null) {
             money = 500;
             this.monument = new Monument(Level.EASY);
         } else if (level == Level.INTERMEDIATE) {
@@ -54,6 +53,7 @@ public class Player {
             money = 150;
             this.monument = new Monument(Level.HARD);
         }
+        this.level = level;
     }
 
     /**
