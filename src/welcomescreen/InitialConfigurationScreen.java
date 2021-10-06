@@ -62,19 +62,19 @@ public class InitialConfigurationScreen {
         Label levelLabel = new Label("Game Level: ");
         Button easy = new Button("Easy");
         easy.setOnAction(event -> {
-            AlertBox.display("Selection","You have selected Easy difficulty!");
+            AlertBox.display("Selection", "You have selected Easy difficulty!");
             level = Level.EASY;
         });
 
         Button intermediate = new Button("Intermediate");
         intermediate.setOnAction(event -> {
-            AlertBox.display("Selection","You have selected Intermediate difficulty!");
+            AlertBox.display("Selection", "You have selected Intermediate difficulty!");
             level = Level.INTERMEDIATE;
         });
 
         Button hard = new Button("Hard");
         hard.setOnAction(event -> {
-            AlertBox.display("Selection","You have selected Hard difficulty!");
+            AlertBox.display("Selection", "You have selected Hard difficulty!");
             level = Level.HARD;
         });
         Label label = new Label("Configuration Screen");
@@ -113,8 +113,9 @@ public class InitialConfigurationScreen {
                         configAlert.getDialogPane().setPrefSize(450, 150);
                         configAlert.setTitle("Error");
                         configAlert.setHeaderText("Invalid Input!");
-                        configAlert.setContentText("Please input a valid name. If you don't select a level, " +
-                                "it will default to easy.");
+                        configAlert.setContentText("Please input a valid name. "
+                                + "If you don't select a level, "
+                                + "it will default to easy.");
                         level = null;
                         configAlert.showAndWait();
                     }
