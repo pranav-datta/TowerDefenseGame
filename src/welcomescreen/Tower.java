@@ -7,4 +7,5 @@ public abstract class Tower {
     abstract int getHealth();
     abstract String getName();
     abstract String getDescription();
+    abstract double getCost();
 }

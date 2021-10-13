@@ -2,6 +2,7 @@ package welcomescreen;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -43,10 +44,13 @@ public class InitialGameScreen {
         Text monumentHealthText = new Text("Monument health: "
                 + controller.getPlayer().getMonument().getHealth());
 
+        Button towerMenu = new Button("Access Tower Store");
+        towerMenu.setOnAction(event -> TowerMenu.display(controller.getPlayer().getLevel(), controller.getPlayer().getMoney()));
+
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
         root.setSpacing(7.5);
-        root.getChildren().addAll(moneyText, pathText, monumentText, monumentHealthText);
+        root.getChildren().addAll(moneyText, pathText, monumentText, monumentHealthText, towerMenu);
 
         Scene scene = new Scene(root, 1000, 380);
         mainStage.setScene(scene);

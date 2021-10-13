@@ -3,13 +3,14 @@ package welcomescreen;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class TowerMenu {
 
-    public static void display(Level level) {
+    public static void display(Level level, double money) {
         Stage window = new Stage();
         /*
         This makes it so you cannot interact with other windows until you are
@@ -21,13 +22,45 @@ public class TowerMenu {
         window.setTitle("Tower Shop");
         window.setMinWidth(250);
 
-        //add shop features here
+        LightTower lightTower = new LightTower(level);
+        Button buyLightTower = new Button("BUY LIGHT TOWER: $" + lightTower.getCost());
+        Label lightTowerLabel = new Label(lightTower.getDescription());
+        buyLightTower.setOnAction(event -> {
+            if (money < lightTower.getCost()) {
+                AlertBox.display("Not Enough Funds!", "You need more money!");
+            } else {
 
-        Button closeButton = new Button("CONFIRM");
+            }
+        });
+
+        MediumTower mediumTower = new MediumTower(level);
+        Button buyMediumTower = new Button("BUY MEDIUM TOWER: $" + mediumTower.getCost());
+        Label mediumTowerLabel = new Label(mediumTower.getDescription());
+        buyMediumTower.setOnAction(event -> {
+            if (money < mediumTower.getCost()) {
+                AlertBox.display("Not Enough Funds!", "You need more money!");
+            } else {
+
+            }
+        });
+
+        HeavyTower heavyTower = new HeavyTower(level);
+        Button buyHeavyTower = new Button("BUY HEAVY TOWER: $" + heavyTower.getCost());
+        Label heavyTowerLabel = new Label(heavyTower.getDescription());
+        buyMediumTower.setOnAction(event -> {
+            if (money < heavyTower.getCost()) {
+                AlertBox.display("Not Enough Funds!", "You need more money!");
+            } else {
+
+            }
+        });
+
+        Button closeButton = new Button("CANCEL");
         closeButton.setOnAction(event -> window.close());
 
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(closeButton);
+        layout.getChildren().addAll(buyLightTower, lightTowerLabel, buyMediumTower, mediumTowerLabel,
+                buyHeavyTower, heavyTowerLabel, closeButton);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout);

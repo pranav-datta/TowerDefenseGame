@@ -47,4 +47,9 @@ public class LightTower extends Tower {
     String getDescription() {
         return this.description;
     }
+
+    @Override
+    double getCost() {
+        return this.cost;
+    }
 }
