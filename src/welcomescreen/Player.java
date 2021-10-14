@@ -74,6 +74,10 @@ public class Player {
         return money;
     }
 
+    public void setMoney(double newMoney) {
+        this.money = newMoney;
+    }
+
     /**
      * Getter for level.
      *

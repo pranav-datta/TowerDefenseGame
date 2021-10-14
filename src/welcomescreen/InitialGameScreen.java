@@ -45,7 +45,7 @@ public class InitialGameScreen {
                 + controller.getPlayer().getMonument().getHealth());
 
         Button towerMenu = new Button("Access Tower Store");
-        towerMenu.setOnAction(event -> TowerMenu.display(controller.getPlayer().getLevel(), controller.getPlayer().getMoney()));
+        towerMenu.setOnAction(event -> TowerMenu.display(controller));
 
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
