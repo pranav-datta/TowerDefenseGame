@@ -55,4 +55,30 @@ public class UnitTests extends ApplicationTest {
         assertEquals(250, c.getPlayer().getMoney(), 0);
         assertEquals(Level.INTERMEDIATE, c.getPlayer().getLevel());
     }
+
+    @Test
+    public void testTowerMenuButton() {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Pranav");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("Access Tower Store");
+        verifyThat("Purchase a tower here!", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testLightTowerButton() {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Pranav");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("Access Tower Store");
+        clickOn("BUY LIGHT TOWER: $25.0");
+        clickOn("CONFIRM");
+        verifyThat("Tower Defense!", NodeMatchers.isNotNull());
+    }
 }

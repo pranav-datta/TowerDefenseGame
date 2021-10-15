@@ -3,6 +3,7 @@ package welcomescreen;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -31,7 +32,7 @@ public class InitialGameScreen {
      */
     public void playGame(Stage stage) {
         this.mainStage = stage;
-
+        Label nameLabel = new Label("Tower Defense!");
         Text moneyText = new Text("Total money: $" + controller.getPlayer().getMoney());
         Text pathText = new Text("The path that enemies will travel along will run from the "
                 + "left side of the screen to the right side of the screen, "
@@ -50,11 +51,12 @@ public class InitialGameScreen {
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
         root.setSpacing(7.5);
-        root.getChildren().addAll(moneyText, pathText, monumentText, monumentHealthText, towerMenu);
+        root.getChildren().addAll(nameLabel, moneyText, pathText,
+                monumentText, monumentHealthText, towerMenu);
 
         Scene scene = new Scene(root, 1000, 380);
         mainStage.setScene(scene);
-        mainStage.setTitle("*insert game name here*");
+        mainStage.setTitle("Tower Defense!");
         mainStage.show();
     }
 }

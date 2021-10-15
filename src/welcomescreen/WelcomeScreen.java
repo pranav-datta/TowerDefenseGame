@@ -62,7 +62,7 @@ public class WelcomeScreen extends Application {
         root.setBackground(background);
 
         // Adding labels
-        Label welcomeLabel = new Label("Welcome to *insert game name here*!");
+        Label welcomeLabel = new Label("Welcome to Tower Defense!");
         welcomeLabel.setFont(new Font("Arial", 30));
         welcomeLabel.setTranslateY(30);
         welcomeLabel.setTextFill(Color.web("#904D39"));

@@ -22,6 +22,8 @@ public class TowerMenu {
         window.setTitle("Tower Shop");
         window.setMinWidth(250);
 
+        Label towerShop = new Label("Purchase a tower here!");
+
         LightTower lightTower = new LightTower(controller.getPlayer().getLevel());
         Button buyLightTower = new Button("BUY LIGHT TOWER: $" + lightTower.getCost());
         Label lightTowerLabel = new Label(lightTower.getDescription());
@@ -74,7 +76,7 @@ public class TowerMenu {
         closeButton.setOnAction(event -> window.close());
 
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(buyLightTower, lightTowerLabel,
+        layout.getChildren().addAll(towerShop, buyLightTower, lightTowerLabel,
                 buyMediumTower, mediumTowerLabel,
                 buyHeavyTower, heavyTowerLabel, closeButton);
         layout.setAlignment(Pos.CENTER);
