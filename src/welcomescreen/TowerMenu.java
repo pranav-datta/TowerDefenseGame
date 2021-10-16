@@ -25,50 +25,71 @@ public class TowerMenu {
         Label towerShop = new Label("Purchase a tower here!");
 
         LightTower lightTower = new LightTower(controller.getPlayer().getLevel());
-        Button buyLightTower = new Button("BUY LIGHT TOWER: $" + lightTower.getCost());
+        Button buyLightTower = new Button("BUY LIGHT TOWER: $" + lightTower.getBuyCost());
         Label lightTowerLabel = new Label(lightTower.getDescription());
 
         double currentFunds = controller.getPlayer().getMoney();
 
+
         buyLightTower.setOnAction(event -> {
-            if (currentFunds < lightTower.getCost()) {
+            if (currentFunds < lightTower.getBuyCost()) {
                 AlertBox.display("Not Enough Funds!", "You need more money!");
             } else {
-                controller.getPlayer().setMoney(currentFunds - lightTower.getCost());
+                controller.getPlayer().setMoney(currentFunds - lightTower.getBuyCost());
                 AlertBox.display("New Balance", "You now have $"
                         + controller.getPlayer().getMoney());
                 window.close();
-                placeTower(lightTower);
+//                placeTower(lightTower);
+            }
+        });
+
+        Button upgradeLightTower = new Button("UPGRADE LIGHT TOWER: $"
+                + controller.getPlayer().getLTowers().get(0).getUpgradeCost());
+        upgradeLightTower.setOnAction(event -> {
+            if (currentFunds < controller.getPlayer().getLTowers().get(0).getUpgradeCost()) {
+                AlertBox.display("Not Enough Funds!", "You need more money!");
+            } else {
+                controller.getPlayer().upgradeLTower(controller.getPlayer().getLTowers().get(0).getUpgradeCost());
             }
         });
 
         MediumTower mediumTower = new MediumTower(controller.getPlayer().getLevel());
-        Button buyMediumTower = new Button("BUY MEDIUM TOWER: $" + mediumTower.getCost());
+        Button buyMediumTower = new Button("BUY MEDIUM TOWER: $" + mediumTower.getBuyCost());
         Label mediumTowerLabel = new Label(mediumTower.getDescription());
         buyMediumTower.setOnAction(event -> {
-            if (currentFunds < mediumTower.getCost()) {
+            if (currentFunds < mediumTower.getBuyCost()) {
                 AlertBox.display("Not Enough Funds!", "You need more money!");
             } else {
-                controller.getPlayer().setMoney(currentFunds - mediumTower.getCost());
+                controller.getPlayer().setMoney(currentFunds - mediumTower.getBuyCost());
                 AlertBox.display("New Balance", "You now have $"
                         + controller.getPlayer().getMoney());
                 window.close();
-                placeTower(mediumTower);
+//                placeTower(mediumTower);
+            }
+        });
+
+        Button upgradeMediumTower = new Button("UPGRADE MEDIUM TOWER: $"
+                + controller.getPlayer().getMTowers().get(0).getUpgradeCost());
+        upgradeLightTower.setOnAction(event -> {
+            if (currentFunds < controller.getPlayer().getMTowers().get(0).getUpgradeCost()) {
+                AlertBox.display("Not Enough Funds!", "You need more money!");
+            } else {
+                controller.getPlayer().upgradeMTower(controller.getPlayer().getMTowers().get(0).getUpgradeCost());
             }
         });
 
         HeavyTower heavyTower = new HeavyTower(controller.getPlayer().getLevel());
-        Button buyHeavyTower = new Button("BUY HEAVY TOWER: $" + heavyTower.getCost());
+        Button buyHeavyTower = new Button("BUY HEAVY TOWER: $" + heavyTower.getBuyCost());
         Label heavyTowerLabel = new Label(heavyTower.getDescription());
         buyHeavyTower.setOnAction(event -> {
-            if (currentFunds < heavyTower.getCost()) {
+            if (currentFunds < heavyTower.getBuyCost()) {
                 AlertBox.display("Not Enough Funds!", "You need more money!");
             } else {
-                controller.getPlayer().setMoney(currentFunds - heavyTower.getCost());
+                controller.getPlayer().setMoney(currentFunds - heavyTower.getBuyCost());
                 AlertBox.display("New Balance", "You now have $"
                         + controller.getPlayer().getMoney());
                 window.close();
-                placeTower(heavyTower);
+//                placeTower(heavyTower);
             }
         });
 
@@ -76,9 +97,8 @@ public class TowerMenu {
         closeButton.setOnAction(event -> window.close());
 
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(towerShop, buyLightTower, lightTowerLabel,
-                buyMediumTower, mediumTowerLabel,
-                buyHeavyTower, heavyTowerLabel, closeButton);
+        layout.getChildren().addAll(towerShop, buyLightTower, lightTowerLabel, upgradeLightTower, buyMediumTower,
+                mediumTowerLabel, upgradeMediumTower, buyHeavyTower, heavyTowerLabel, closeButton);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout);
@@ -88,10 +108,6 @@ public class TowerMenu {
         (Blocks any user interaction until alert box is closed)
         */
         window.showAndWait();
-
-    }
-
-    private static void placeTower(Tower tower) {
 
     }
 }

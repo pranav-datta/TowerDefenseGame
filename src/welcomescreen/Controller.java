@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 /**
  * A Controller class that handles flow between
  * different screens in the Application.
+ *
  * @author Olaolu Dada, Pranav Datta
  * @version 1.0
  */

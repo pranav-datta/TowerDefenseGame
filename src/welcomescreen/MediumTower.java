@@ -5,23 +5,24 @@ public class MediumTower extends Tower {
     private int damage;
     private String name;
     private String description;
-    private double cost;
+    private double buyCost;
+    private double upgradeCost;
 
     public MediumTower(Level level) {
         this.health = 100;
         this.damage = 50;
         this.name = "Medium Tower";
         this.description = "The average tower, packs a punch but not too much punch";
+        this.upgradeCost = 40;
         if (level == Level.EASY) {
-            this.cost = 50;
+            this.buyCost = 50;
         }
         if (level == Level.INTERMEDIATE) {
-            this.cost = 75;
+            this.buyCost = 75;
         }
         if (level == Level.HARD) {
-            this.cost = 100;
-        }
-    }
+            this.buyCost = 100;
+        }    }
 
     @Override
     void attackEnemy() {
@@ -49,7 +50,12 @@ public class MediumTower extends Tower {
     }
 
     @Override
-    double getCost() {
-        return this.cost;
+    double getBuyCost() {
+        return this.buyCost;
+    }
+
+    @Override
+    double getUpgradeCost() {
+        return this.upgradeCost;
     }
 }

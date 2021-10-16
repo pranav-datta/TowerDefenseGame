@@ -30,6 +30,7 @@ public class InitialConfigurationScreen {
 
     /**
      * Getter method for level
+     *
      * @return the desired level
      */
     public Level getLevel() {
@@ -38,6 +39,7 @@ public class InitialConfigurationScreen {
 
     /**
      * Setter method for level
+     *
      * @param level desired level to set to
      */
     public void setLevel(Level level) {
@@ -46,6 +48,7 @@ public class InitialConfigurationScreen {
 
     /**
      * Method that initializes the game where user sets the player name and level
+     *
      * @param mainStage stage that is used to create the screen
      */
     public void initializeGame(Stage mainStage) {

@@ -1,6 +1,8 @@
 package welcomescreen;
+
 /**
  * Monument class to encapsulate monument's data.
+ *
  * @author Olaolu Dada
  * @version 1.0
  */
@@ -9,6 +11,7 @@ public class Monument {
 
     /**
      * Constructor for Monument Class.
+     *
      * @param level represents level
      */
     public Monument(Level level) {
@@ -31,7 +34,7 @@ public class Monument {
     /**
      * Getter for health.
      *
-     * @return  monuments health.
+     * @return monuments health.
      */
     public int getHealth() {
         return health;

@@ -12,7 +12,7 @@ public class AlertBox {
     public static void display(String title, String message) {
         Stage window = new Stage();
         /*
-        This makes it so you cannot interact with other windows until you are
+        This lets you cannot interact with other windows until you are
         done with this window when it pops up.
         This is important because we want to ensure that the user knows what
         they selected.

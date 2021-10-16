@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 /**
  * Initial welcome screen.
+ *
  * @author Olaolu Dada, Eric Shavkin
  * @version 1.0
  */
@@ -93,6 +94,7 @@ public class WelcomeScreen extends Application {
     /**
      * The main method is only needed for the IDE with limited
      * JavaFX support. Not needed for running from the command line.
+     *
      * @param args arg from command line.
      */
     public static void main(String[] args) {

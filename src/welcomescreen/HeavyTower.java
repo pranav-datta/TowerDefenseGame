@@ -5,21 +5,23 @@ public class HeavyTower extends Tower {
     private int damage;
     private String name;
     private String description;
-    private double cost;
+    private double buyCost;
+    private double upgradeCost;
 
     public HeavyTower(Level level) {
         this.health = 100;
         this.damage = 100;
         this.name = "Medium Tower";
         this.description = "The big behemoth";
+        this.upgradeCost = 0;
         if (level == Level.EASY) {
-            this.cost = 75;
+            this.buyCost = 75;
         }
         if (level == Level.INTERMEDIATE) {
-            this.cost = 100;
+            this.buyCost = 100;
         }
         if (level == Level.HARD) {
-            this.cost = 150;
+            this.buyCost = 150;
         }
     }
 
@@ -49,7 +51,13 @@ public class HeavyTower extends Tower {
     }
 
     @Override
-    double getCost() {
-        return this.cost;
+    double getBuyCost() {
+        return this.buyCost;
     }
+
+    @Override
+    double getUpgradeCost() {
+        return this.upgradeCost;
+    }
+
 }
