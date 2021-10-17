@@ -82,4 +82,29 @@ public class UnitTests extends ApplicationTest {
         clickOn("CONFIRM");
         verifyThat("Tower Defense!", NodeMatchers.isNotNull());
     }
+
+    @Test
+    public void testEndGameButton() {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Spencer");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        verifyThat("End the Game", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testMediumTowerButton() {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Spencer");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("Access Tower Store");
+        clickOn("BUY MEDIUM TOWER: $50.0");
+        clickOn("CONFIRM");
+        verifyThat("Tower Defense!", NodeMatchers.isNotNull());
+    }
 }

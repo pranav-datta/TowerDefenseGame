@@ -35,11 +35,8 @@ public class TowerMenu {
             if (currentFunds < lightTower.getBuyCost()) {
                 AlertBox.display("Not Enough Funds!", "You need more money!");
             } else {
-                controller.getPlayer().setMoney(currentFunds - lightTower.getBuyCost());
-                AlertBox.display("New Balance", "You now have $"
-                        + controller.getPlayer().getMoney());
+                controller.getPlayer().placeTower(lightTower);
                 window.close();
-//                placeTower(lightTower);
             }
         });
 
@@ -60,11 +57,8 @@ public class TowerMenu {
             if (currentFunds < mediumTower.getBuyCost()) {
                 AlertBox.display("Not Enough Funds!", "You need more money!");
             } else {
-                controller.getPlayer().setMoney(currentFunds - mediumTower.getBuyCost());
-                AlertBox.display("New Balance", "You now have $"
-                        + controller.getPlayer().getMoney());
+                controller.getPlayer().placeTower(mediumTower);
                 window.close();
-//                placeTower(mediumTower);
             }
         });
 
@@ -85,11 +79,8 @@ public class TowerMenu {
             if (currentFunds < heavyTower.getBuyCost()) {
                 AlertBox.display("Not Enough Funds!", "You need more money!");
             } else {
-                controller.getPlayer().setMoney(currentFunds - heavyTower.getBuyCost());
-                AlertBox.display("New Balance", "You now have $"
-                        + controller.getPlayer().getMoney());
+                controller.getPlayer().placeTower(heavyTower);
                 window.close();
-//                placeTower(heavyTower);
             }
         });
 

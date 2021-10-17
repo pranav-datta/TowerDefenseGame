@@ -76,13 +76,13 @@ public class Controller extends Application {
         game.playGame(primaryStage);
     }
 
-    ///**
-    // * Shows the game over screen
-    // */
-    //public void end() {
-    //    primaryStage.hide();
-    //    endGameUI.start(primaryStage);
-    //}
+    /**
+     * Shows the game over screen
+     */
+//    public void end() {
+//        primaryStage.hide();
+//        EndGame.start(primaryStage);
+//    }
 
     ///**
     // * Saves the game

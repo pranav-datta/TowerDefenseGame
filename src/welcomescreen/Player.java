@@ -1,5 +1,6 @@
 package welcomescreen;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -16,6 +17,11 @@ public class Player {
     private ArrayList<LightTower> lTowers;
     private ArrayList<MediumTower> mTowers;
     private ArrayList<HeavyTower> hTowers;
+    private ArrayList<Tower> towerPlots;
+    private int rows;
+    private int plotCapacity;
+
+    private static final int CAPACITY = 4;
 
 
     /**
@@ -42,9 +48,9 @@ public class Player {
     public Player(String name) {
         this(name, Level.EASY);
         this.monument = new Monument(Level.EASY);
-        this.lTowers = new ArrayList<>();
-        this.mTowers = new ArrayList<>();
-        this.hTowers = new ArrayList<>();
+        this.lTowers = new ArrayList<>(CAPACITY);
+        this.mTowers = new ArrayList<>(CAPACITY);
+        this.hTowers = new ArrayList<>(CAPACITY);
 
     }
 
@@ -68,9 +74,15 @@ public class Player {
             this.monument = new Monument(Level.HARD);
         }
         this.level = level;
-        this.lTowers = new ArrayList<>();
-        this.mTowers = new ArrayList<>();
-        this.hTowers = new ArrayList<>();
+        this.lTowers = new ArrayList<>(CAPACITY);
+        this.mTowers = new ArrayList<>(CAPACITY);
+        this.hTowers = new ArrayList<>(CAPACITY);
+
+        lTowers.add(new LightTower(level));
+        plotCapacity = 12;
+        towerPlots = new ArrayList<>(plotCapacity);
+        rows = 3;
+
     }
 
     /**
@@ -158,6 +170,67 @@ public class Player {
             hTowers.add(hTowers.size(), newTower);
             mTowers.remove(0);
             money -= cost;
+        }
+    }
+
+    /**
+     * Getter for plots.
+     *
+     * @return the tower plots the player has.
+     */
+    public ArrayList<Tower> getTowerPlots() {
+        return towerPlots;
+    }
+
+    /**
+     * Getter for num rows.
+     *
+     * @return the number of rows in the plots.
+     */
+    public int getRows() {
+        return rows;
+    }
+
+    /**
+     * Method to place a tower in the plots.
+     *
+     */
+    public void placeTower(Tower tower) {
+        if (this.isFull()) {
+            AlertBox.display("Not Enough Space!", "Either clear your destroyed towers or upgrade them!");
+        } else {
+            for (int i = 0; i < towerPlots.size(); i++) {
+                if (towerPlots.get(i) == null) {
+                    towerPlots.set(i, tower);
+                    break;
+                }
+            }
+            money -= tower.getBuyCost();
+            AlertBox.display("New Balance", "You now have $"
+                    + money);
+        }
+    }
+
+    /**
+     * Checks if all plots are full
+     */
+    public boolean isFull() {
+        for (Tower t : towerPlots) {
+            if (t == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Clears out all of the destroyed plots.
+     */
+    public void clear() {
+        for (Tower t : towerPlots) {
+            if (t.isDestroyed()) {
+                t = null;
+            }
         }
     }
 

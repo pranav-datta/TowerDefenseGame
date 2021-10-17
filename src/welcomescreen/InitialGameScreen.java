@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class InitialGameScreen {
     private Controller controller;
     private Stage mainStage;
+    private ImageRender imageRender;
 
     /**
      * No-arg constructor for initial game screen
@@ -30,7 +32,7 @@ public class InitialGameScreen {
         this.controller = controller;
     }
 
-    private VBox mainPage(BorderPane root) {
+    private VBox header(BorderPane root) {
         Text moneyText = new Text("Total money: $" + controller.getPlayer().getMoney());
         Text pathText = new Text("The path that enemies will travel along will run from the "
                 + "left side of the screen to the right side of the screen, "
@@ -46,12 +48,70 @@ public class InitialGameScreen {
         Button towerMenu = new Button("Access Tower Store");
         towerMenu.setOnAction(event -> TowerMenu.display(controller));
 
+
+
         VBox main = new VBox();
         main.setAlignment(Pos.CENTER);
         main.setSpacing(7.5);
         main.getChildren().addAll(moneyText, pathText, monumentText, monumentHealthText, towerMenu);
         return main;
     }
+
+    /**
+     * Reloads the title, inventory, and map.
+     *
+     * @param root borderpane to reload.
+     */
+    private void reload(BorderPane root) {
+        root.setTop(header(root));
+        root.setRight(getInventory());
+        root.setCenter(mainPage(root));
+    }
+    /**
+     * Creates a scrollpane containing the plot for the map.
+     *
+     * @param root borderpane to reload
+     * @return scrollpane representing the plots.
+     */
+    private ScrollPane mainPage(BorderPane root) {
+        GridPane plots = new GridPane();
+        ArrayList<Tower> towerPlots = controller.getPlayer().getTowerPlots();
+        int rows = controller.getPlayer().getRows();
+
+        int i = 0;
+        for (int row = 0; row < rows; row++) {
+            for (int column = 0; column < 4; column++) {
+                Tower tower = (i < towerPlots.size()) ? towerPlots.get(i) : null;
+                Pane pane = imageRender.renderPlot(tower);
+                plots.add(pane, column, row);
+                i++;
+            }
+        }
+        plots.setHgap(10);
+        plots.setVgap(10);
+        plots.setAlignment(Pos.CENTER);
+        VBox vbox = new VBox(2);
+
+        HBox hbox = new HBox();
+        Button clear = new Button("Clear destroyed towers");
+        clear.setOnAction(e -> {
+            controller.getPlayer().clear();
+            reload(root);
+
+        });
+        hbox.getChildren().add(clear);
+        hbox.setAlignment(Pos.BOTTOM_RIGHT);
+
+//        //Test for end game screen
+//        Button tempEndGame = new Button("End the Game");
+//        tempEndGame.setOnAction(event -> controller.end());
+
+        vbox.getChildren().addAll(plots, hbox);
+        ScrollPane pane = new ScrollPane(vbox);
+        pane.setPadding(new Insets(20, 20, 20, 20));
+        return pane;
+    }
+
 
     /**
      * Creates the inventory panel.
