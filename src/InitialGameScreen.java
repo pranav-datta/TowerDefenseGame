@@ -1,5 +1,3 @@
-package welcomescreen;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -30,6 +28,7 @@ public class InitialGameScreen {
      */
     public InitialGameScreen(Controller controller) {
         this.controller = controller;
+        imageRender = new ImageRender();
     }
 
     private VBox header(BorderPane root) {

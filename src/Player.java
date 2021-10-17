@@ -1,6 +1,3 @@
-package welcomescreen;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -32,9 +29,9 @@ public class Player {
     public Player() {
         this("George P. Burdell", Level.EASY);
         this.monument = new Monument(Level.EASY);
-        this.lTowers = new ArrayList<>();
-        this.mTowers = new ArrayList<>();
-        this.hTowers = new ArrayList<>();
+        this.lTowers = new ArrayList<>(CAPACITY);
+        this.mTowers = new ArrayList<>(CAPACITY);
+        this.hTowers = new ArrayList<>(CAPACITY);
 
     }
 
@@ -152,25 +149,17 @@ public class Player {
     }
 
     public void upgradeLTower(double cost) {
-        if (lTowers.size() == 0) {
-            throw new IllegalArgumentException("You have no more light towers to upgrade");
-        } else {
-            MediumTower newTower = new MediumTower(level);
-            mTowers.add(mTowers.size(), newTower);
-            lTowers.remove(0);
-            money -= cost;
-        }
+        MediumTower newTower = new MediumTower(level);
+        mTowers.add(mTowers.size(), newTower);
+        lTowers.remove(0);
+        money -= cost;
     }
 
     public void upgradeMTower(double cost) {
-        if (mTowers.size() == 0) {
-            throw new IllegalArgumentException("You have no more medium towers to upgrade");
-        } else {
-            HeavyTower newTower = new HeavyTower(level);
-            hTowers.add(hTowers.size(), newTower);
-            mTowers.remove(0);
-            money -= cost;
-        }
+        HeavyTower newTower = new HeavyTower(level);
+        hTowers.add(hTowers.size(), newTower);
+        mTowers.remove(0);
+        money -= cost;
     }
 
     /**
@@ -196,18 +185,11 @@ public class Player {
      *
      */
     public void placeTower(Tower tower) {
-        if (this.isFull()) {
-            AlertBox.display("Not Enough Space!", "Either clear your destroyed towers or upgrade them!");
-        } else {
-            for (int i = 0; i < towerPlots.size(); i++) {
-                if (towerPlots.get(i) == null) {
-                    towerPlots.set(i, tower);
-                    break;
-                }
+        for (int i = 0; i < towerPlots.size(); i++) {
+            if (towerPlots.get(i) == null) {
+                towerPlots.set(i, tower);
+                break;
             }
-            money -= tower.getBuyCost();
-            AlertBox.display("New Balance", "You now have $"
-                    + money);
         }
     }
 

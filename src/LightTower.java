@@ -1,6 +1,4 @@
-package welcomescreen;
-
-public class MediumTower extends Tower {
+public class LightTower extends Tower {
     private int health;
     private int damage;
     private String name;
@@ -8,21 +6,22 @@ public class MediumTower extends Tower {
     private double buyCost;
     private double upgradeCost;
 
-    public MediumTower(Level level) {
+    public LightTower(Level level) {
         this.health = 100;
-        this.damage = 50;
-        this.name = "Medium Tower";
-        this.description = "The average tower, packs a punch but not too much punch";
-        this.upgradeCost = 40;
+        this.damage = 25;
+        this.name = "Light Tower";
+        this.upgradeCost = 30;
+        this.description = "Your smallest tower, cheap but gets the job done";
         if (level == Level.EASY) {
-            this.buyCost = 50;
+            this.buyCost = 25;
         }
         if (level == Level.INTERMEDIATE) {
-            this.buyCost = 75;
+            this.buyCost = 50;
         }
         if (level == Level.HARD) {
-            this.buyCost = 100;
-        }    }
+            this.buyCost = 75;
+        }
+    }
 
     @Override
     void attackEnemy() {

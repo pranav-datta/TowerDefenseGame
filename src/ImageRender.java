@@ -1,5 +1,3 @@
-package welcomescreen;
-
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -41,7 +39,7 @@ public class ImageRender {
      * @return StackPane containing a blank plot.
      */
     public StackPane createBlankPlot() {
-        Rectangle plot = new Rectangle(150, 150);
+        Rectangle plot = new Rectangle(50, 50);
         plot.setFill(Color.GREY);
         StackPane pane = new StackPane(plot);
         return pane;

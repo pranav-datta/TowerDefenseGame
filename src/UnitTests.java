@@ -1,5 +1,3 @@
-package welcomescreen;
-
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
@@ -57,6 +55,12 @@ public class UnitTests extends ApplicationTest {
         assertEquals(Level.INTERMEDIATE, c.getPlayer().getLevel());
     }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+///////////////////////            Start M3 Tests              ///////////////////////////////////////////
+//
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     @Test
     public void testTowerMenuButton() {
         clickOn("Click to Start");
@@ -78,7 +82,7 @@ public class UnitTests extends ApplicationTest {
         clickOn("CONFIRM");
         clickOn("OK");
         clickOn("Access Tower Store");
-        clickOn("BUY LIGHT TOWER: $25.0");
+        clickOn("BUY LIGHT TOWER");
         clickOn("CONFIRM");
         verifyThat("Tower Defense!", NodeMatchers.isNotNull());
     }
@@ -103,8 +107,67 @@ public class UnitTests extends ApplicationTest {
         clickOn("CONFIRM");
         clickOn("OK");
         clickOn("Access Tower Store");
-        clickOn("BUY MEDIUM TOWER: $50.0");
+        clickOn("BUY MEDIUM TOWER");
         clickOn("CONFIRM");
         verifyThat("Tower Defense!", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testHeavyTowerButton() {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Eric");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("Access Tower Store");
+        clickOn("BUY HEAVY TOWER");
+        clickOn("CONFIRM");
+        verifyThat("Tower Defense!", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testBuyLightTower() {
+        Player player1 = new Player("Eric", Level.HARD);
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Eric");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("Access Tower Store");
+        clickOn("BUY LIGHT TOWER");
+        clickOn("CONFIRM");
+        assertEquals(player1.getMoney(), 75, 0);
+    }
+
+    @Test
+    public void testBuyMediumTower() {
+        Player player1 = new Player("Laolu", Level.HARD);
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Laolu");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("Access Tower Store");
+        clickOn("BUY MEDIUM TOWER");
+        clickOn("CONFIRM");
+        assertEquals(player1.getMoney(), 50, 0);
+    }
+
+    @Test
+    public void testBuyHeavyTower() {
+        Player player1 = new Player("Laolu", Level.HARD);
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Laolu");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("Access Tower Store");
+        clickOn("BUY HEAVY TOWER");
+        clickOn("CONFIRM");
+        assertEquals(player1.getMoney(), 0, 0);
     }
 }

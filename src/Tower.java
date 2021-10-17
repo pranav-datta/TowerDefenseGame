@@ -1,5 +1,3 @@
-package welcomescreen;
-
 public abstract class Tower {
     private boolean destroyed;
 
