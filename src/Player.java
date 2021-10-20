@@ -197,7 +197,6 @@ public class Player {
      */
     public boolean isFull() {
         for (Tower t : towerPlots) {
-            System.out.println(t.getClass().getName());
             if (t == null) {
                 return false;
             }
