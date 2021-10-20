@@ -33,6 +33,7 @@ public class GameScreen {
     }
 
     private VBox header(BorderPane root) {
+        Label gameName = new Label("Tower Defense!");
         Text moneyText = new Text("Total money: $" + controller.getPlayer().getMoney());
         Text pathText = new Text("The path that enemies will travel along will run from the "
                 + "left side of the screen to the right side of the screen, "
@@ -57,7 +58,7 @@ public class GameScreen {
         VBox main = new VBox();
         main.setAlignment(Pos.CENTER);
         main.setSpacing(7.5);
-        main.getChildren().addAll(moneyText, pathText, monumentText, monumentHealthText, towerMenu);
+        main.getChildren().addAll(gameName, moneyText, pathText, monumentText, monumentHealthText, towerMenu);
         return main;
     }
 

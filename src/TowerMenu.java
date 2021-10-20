@@ -18,10 +18,13 @@ public class TowerMenu {
         This is important because we want to ensure that the user knows what
         they selected.
          */
+
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Tower Shop");
         window.setMinWidth(250);
 
+        double currentFunds = controller.getPlayer().getMoney();
+        Label currentMoney = new Label("Current Funds: $" + controller.getPlayer().getMoney());
         Label towerShop = new Label("Purchase a tower here!");
 
         LightTower lightTower = new LightTower(controller.getPlayer().getLevel());
@@ -30,7 +33,6 @@ public class TowerMenu {
         Label buyLightPrice = new Label("$ " + lightTower.getBuyCost());
         Label lightTowerLabel = new Label(lightTower.getDescription());
 
-        double currentFunds = controller.getPlayer().getMoney();
         ArrayList<Tower> tPlots = controller.getPlayer().getTowerPlots();
 
         buyLightTower.setOnAction(event -> {
@@ -136,9 +138,9 @@ public class TowerMenu {
         closeButton.setOnAction(event -> window.close());
 
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(towerShop, buyLightTower, buyLightPrice, lightTowerLabel, upgradeLightTower,
-                upgradeLightPrice,  buyMediumTower, buyMediumPrice, mediumTowerLabel, upgradeMediumTower,
-                upgradeMediumPrice, buyHeavyTower, buyHeavyPrice, heavyTowerLabel, closeButton);
+        layout.getChildren().addAll(currentMoney, towerShop, buyLightTower, buyLightPrice, lightTowerLabel,
+                upgradeLightTower, upgradeLightPrice,  buyMediumTower, buyMediumPrice, mediumTowerLabel,
+                upgradeMediumTower, upgradeMediumPrice, buyHeavyTower, buyHeavyPrice, heavyTowerLabel, closeButton);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout);
