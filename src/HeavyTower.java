@@ -1,5 +1,3 @@
-package welcomescreen;
-
 public class HeavyTower extends Tower {
     private int health;
     private int damage;
@@ -11,7 +9,7 @@ public class HeavyTower extends Tower {
     public HeavyTower(Level level) {
         this.health = 100;
         this.damage = 100;
-        this.name = "Medium Tower";
+        this.name = "Heavy Tower";
         this.description = "The big behemoth";
         this.upgradeCost = 0;
         if (level == Level.EASY) {

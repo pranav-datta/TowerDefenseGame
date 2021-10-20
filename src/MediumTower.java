@@ -1,5 +1,3 @@
-package welcomescreen;
-
 public class MediumTower extends Tower {
     private int health;
     private int damage;
@@ -26,7 +24,7 @@ public class MediumTower extends Tower {
 
     @Override
     void attackEnemy() {
-        //decrease enemy health by damage
+        // decrease enemy health by damage
     }
 
     @Override

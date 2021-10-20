@@ -1,5 +1,3 @@
-package welcomescreen;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -18,8 +16,8 @@ public class Controller extends Application {
     private InitialConfigurationScreen config;
     private boolean saved;
     private WelcomeScreen welcome;
-    private InitialGameScreen game;
-    //private EndGameUI endGameUI;
+    private GameScreen game;
+    private EndGame endGame;
 
     /**
      * Constructor for the Controller.Controller class.
@@ -31,8 +29,9 @@ public class Controller extends Application {
         this.primaryStage = primaryStage;
         welcome = new WelcomeScreen(this);
         config = new InitialConfigurationScreen();
-        game = new InitialGameScreen(this);
         welcome.start(primaryStage);
+        game = new GameScreen(this);
+        endGame = new EndGame(this);
     }
 
     /**
@@ -64,7 +63,7 @@ public class Controller extends Application {
     /**
      * Transitions from Welcome Screen to Config screen
      */
-    public void startConfigUI() {
+    public void startInitialConfig() {
         config.initializeGame(primaryStage);
         saved = false;
     }
@@ -76,13 +75,22 @@ public class Controller extends Application {
         game.playGame(primaryStage);
     }
 
-    ///**
-    // * Shows the game over screen
-    // */
-    //public void end() {
-    //    primaryStage.hide();
-    //    endGameUI.start(primaryStage);
-    //}
+    /**
+     * Getter for game screen
+     *
+     * @return Game Screen
+     */
+    public GameScreen getGame() {
+        return game;
+    }
+
+    /**
+     * Shows the game over screen
+     */
+    public void end() {
+        primaryStage.hide();
+        endGame.start(primaryStage);
+    }
 
     ///**
     // * Saves the game

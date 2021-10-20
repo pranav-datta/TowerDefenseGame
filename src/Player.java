@@ -1,5 +1,3 @@
-package welcomescreen;
-
 import java.util.ArrayList;
 
 /**
@@ -16,6 +14,11 @@ public class Player {
     private ArrayList<LightTower> lTowers;
     private ArrayList<MediumTower> mTowers;
     private ArrayList<HeavyTower> hTowers;
+    private ArrayList<Tower> towerPlots;
+    private int rows;
+
+    private static final int CAPACITY = 12;
+    private static final int PLOTCAPACITY = 36;
 
 
     /**
@@ -25,10 +28,11 @@ public class Player {
      */
     public Player() {
         this("George P. Burdell", Level.EASY);
-        this.monument = new Monument(Level.EASY);
-        this.lTowers = new ArrayList<>();
-        this.mTowers = new ArrayList<>();
-        this.hTowers = new ArrayList<>();
+        monument = new Monument(Level.EASY);
+        lTowers = new ArrayList<>(CAPACITY);
+        mTowers = new ArrayList<>(CAPACITY);
+        hTowers = new ArrayList<>(CAPACITY);
+        towerPlots = new ArrayList<>(PLOTCAPACITY);
 
     }
 
@@ -41,10 +45,11 @@ public class Player {
      */
     public Player(String name) {
         this(name, Level.EASY);
-        this.monument = new Monument(Level.EASY);
-        this.lTowers = new ArrayList<>();
-        this.mTowers = new ArrayList<>();
-        this.hTowers = new ArrayList<>();
+        monument = new Monument(Level.EASY);
+        lTowers = new ArrayList<>(CAPACITY);
+        mTowers = new ArrayList<>(CAPACITY);
+        hTowers = new ArrayList<>(CAPACITY);
+        towerPlots = new ArrayList<>(PLOTCAPACITY);
 
     }
 
@@ -68,9 +73,15 @@ public class Player {
             this.monument = new Monument(Level.HARD);
         }
         this.level = level;
-        this.lTowers = new ArrayList<>();
-        this.mTowers = new ArrayList<>();
-        this.hTowers = new ArrayList<>();
+        lTowers = new ArrayList<>(CAPACITY);
+        mTowers = new ArrayList<>(CAPACITY);
+        hTowers = new ArrayList<>(CAPACITY);
+
+        lTowers.add(new LightTower(level));
+        towerPlots = new ArrayList<>(PLOTCAPACITY);
+        towerPlots.add(new LightTower(level));
+        rows = 3;
+
     }
 
     /**
@@ -140,24 +151,67 @@ public class Player {
     }
 
     public void upgradeLTower(double cost) {
-        if (lTowers.size() == 0) {
-            throw new IllegalArgumentException("You have no more light towers to upgrade");
-        } else {
-            MediumTower newTower = new MediumTower(level);
-            mTowers.add(mTowers.size(), newTower);
-            lTowers.remove(0);
-            money -= cost;
+        MediumTower newTower = new MediumTower(level);
+        for (int i = 0; i < towerPlots.size(); i++) {
+            if (towerPlots.get(i) instanceof LightTower) {
+                towerPlots.set(i, newTower);
+                break;
+            }
         }
+        mTowers.add(newTower);
+        lTowers.remove(0);
     }
 
     public void upgradeMTower(double cost) {
-        if (mTowers.size() == 0) {
-            throw new IllegalArgumentException("You have no more medium towers to upgrade");
-        } else {
-            HeavyTower newTower = new HeavyTower(level);
-            hTowers.add(hTowers.size(), newTower);
-            mTowers.remove(0);
-            money -= cost;
+        HeavyTower newTower = new HeavyTower(level);
+        for (int i = 0; i < towerPlots.size(); i++) {
+            if (towerPlots.get(i) instanceof MediumTower) {
+                towerPlots.set(i, newTower);
+                break;
+            }
+        }
+        hTowers.add(newTower);
+        mTowers.remove(0);;
+    }
+
+    /**
+     * Getter for plots.
+     *
+     * @return the tower plots the player has.
+     */
+    public ArrayList<Tower> getTowerPlots() {
+        return towerPlots;
+    }
+
+    /**
+     * Getter for num rows.
+     *
+     * @return the number of rows in the plots.
+     */
+    public int getRows() {
+        return rows;
+    }
+
+    /**
+     * Checks if all plots are full
+     */
+    public boolean isFull() {
+        for (Tower t : towerPlots) {
+            if (t == null) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Clears out all of the destroyed plots.
+     */
+    public void clear() {
+        for (Tower t : towerPlots) {
+            if (t.isDestroyed()) {
+                t = null;
+            }
         }
     }
 

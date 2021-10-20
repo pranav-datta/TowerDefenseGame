@@ -1,5 +1,3 @@
-package welcomescreen;
-
 /**
  * Enumerated type Level to track what level the
  * player chooses.
@@ -8,7 +6,7 @@ package welcomescreen;
  * @version 1.0
  */
 
-enum Level {
+public enum Level {
     EASY, INTERMEDIATE, HARD;
 }
 

@@ -1,5 +1,3 @@
-package welcomescreen;
-
 /**
  * Monument class to encapsulate monument's data.
  *

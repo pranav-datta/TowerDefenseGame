@@ -1,5 +1,3 @@
-package welcomescreen;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,40 +16,39 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
- * Initial welcome screen.
- *
- * @author Olaolu Dada, Eric Shavkin
+ * Game Over Code
+ * @author Spencer Kim
  * @version 1.0
  */
-public class WelcomeScreen extends Application {
-    private Controller controller;
+public class EndGame extends Application {
     private Stage stage;
+    private Controller controller;
 
     /**
-     * Constructor taking the main controller object.
+     * Construction for the main controller of the end game.
      *
-     * @param controller the controller object
+     * @param controller for controller object
      */
-    public WelcomeScreen(Controller controller) {
+    public EndGame(Controller controller) {
         this.controller = controller;
     }
 
     /**
-     * Welcome screen constructor for the launch to work.
+     * Welcome screen construction to launch.
      */
-    public WelcomeScreen() {
-    }
+    public EndGame() {
+    } // no-arg constructor to launch.
 
-    @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         this.stage = stage;
         stage.setMinWidth(950);
         stage.setMinHeight(650);
         BorderPane root = new BorderPane();
-        Image image = new Image("https://lcl.okstate.edu/gogreek/site-files/images/sigma-phi-epsilon_crest-01.png");
 
-        // Create background image
-        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
+        Image image = new Image("https://image.freepik.com/free-vector/game-with-glitch-effect_225004-661.jpg");
+
+        //Background image
+        BackgroundSize backgroundSize = new BackgroundSize(200, 200, true, true, true, true);
         BackgroundImage backgroundImage = new BackgroundImage(image,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
@@ -62,42 +59,24 @@ public class WelcomeScreen extends Application {
         Background background = new Background(backgroundImage);
         root.setBackground(background);
 
-        // Adding labels
-        Label welcomeLabel = new Label("Welcome to Tower Defense!");
-        welcomeLabel.setFont(new Font("Arial", 30));
-        welcomeLabel.setTranslateY(30);
-        welcomeLabel.setTextFill(Color.web("#904D39"));
 
-        Button welcomeButton = new Button("Click to Start");
+        Button welcomeButton = new Button("Start New Game");
         welcomeButton.setOnAction(e -> {
-            InitialConfigurationScreen config = new InitialConfigurationScreen();
             stage.hide();
-            config.initializeGame(stage);
+            controller.startInitialConfig();
         });
-
-        root.setTop(welcomeLabel);
         root.setCenter(welcomeButton);
 
         welcomeButton.setPadding(new Insets(15, 15, 15, 15)); // Increase button size
         BorderPane.setMargin(welcomeButton, new Insets(10, 10, 440, 10)); // Move button upwards
         BorderPane.setAlignment(welcomeButton, Pos.CENTER);
-        BorderPane.setAlignment(welcomeLabel, Pos.CENTER);
 
 
         // Create a scene and place it in the stage
         Scene scene = new Scene(root, 300, 100);
-        stage.setTitle("Welcome Page"); // Set the stage title
+        stage.setTitle("Game Over"); // Set the stage title
         stage.setScene(scene); // Place the scene in the stage
         stage.show(); // Display the stage
     }
-
-    /**
-     * The main method is only needed for the IDE with limited
-     * JavaFX support. Not needed for running from the command line.
-     *
-     * @param args arg from command line.
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
+

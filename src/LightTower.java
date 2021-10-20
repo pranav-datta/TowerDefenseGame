@@ -1,5 +1,3 @@
-package welcomescreen;
-
 public class LightTower extends Tower {
     private int health;
     private int damage;
