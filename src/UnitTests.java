@@ -8,7 +8,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.testfx.api.FxAssert.verifyThat;
 
 public class UnitTests extends ApplicationTest {
-    Controller controller;
+    private Controller controller;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -55,11 +55,7 @@ public class UnitTests extends ApplicationTest {
         assertEquals(Level.INTERMEDIATE, c.getPlayer().getLevel());
     }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-///////////////////////            Start M3 Tests              ///////////////////////////////////////////
-//
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //M3 Tests
 
     @Test
     public void testTowerMenuButton() {

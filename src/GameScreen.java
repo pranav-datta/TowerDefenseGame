@@ -58,7 +58,8 @@ public class GameScreen {
         VBox main = new VBox();
         main.setAlignment(Pos.CENTER);
         main.setSpacing(7.5);
-        main.getChildren().addAll(gameName, moneyText, pathText, monumentText, monumentHealthText, towerMenu);
+        main.getChildren().addAll(gameName, moneyText, pathText,
+                monumentText, monumentHealthText, towerMenu);
         return main;
     }
 
