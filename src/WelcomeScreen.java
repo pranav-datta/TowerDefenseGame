@@ -70,7 +70,7 @@ public class WelcomeScreen extends Application {
         welcomeButton.setOnAction(e -> {
             InitialConfigurationScreen config = new InitialConfigurationScreen();
             stage.hide();
-            config.initializeGame(stage);
+            (config).initializeGame(stage);
         });
 
         root.setTop(welcomeLabel);

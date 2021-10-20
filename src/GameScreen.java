@@ -6,12 +6,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class InitialGameScreen {
+public class GameScreen {
     private Controller controller;
     private Stage mainStage;
     private ImageRender imageRender;
@@ -19,14 +20,14 @@ public class InitialGameScreen {
     /**
      * No-arg constructor for initial game screen
      */
-    public InitialGameScreen() {
+    public GameScreen() {
     }
 
     /**
      * Constructor for initial game screen
      * @param controller controller
      */
-    public InitialGameScreen(Controller controller) {
+    public GameScreen(Controller controller) {
         this.controller = controller;
         imageRender = new ImageRender();
     }
@@ -45,7 +46,11 @@ public class InitialGameScreen {
                 + controller.getPlayer().getMonument().getHealth());
 
         Button towerMenu = new Button("Access Tower Store");
-        towerMenu.setOnAction(event -> TowerMenu.display(controller));
+        towerMenu.setOnAction(e -> {
+            TowerMenu.display(controller);
+            reload(root);
+        });
+
 
 
 
@@ -61,7 +66,7 @@ public class InitialGameScreen {
      *
      * @param root borderpane to reload.
      */
-    private void reload(BorderPane root) {
+    public void reload(BorderPane root) {
         root.setTop(header(root));
         root.setRight(getInventory());
         root.setCenter(mainPage(root));
@@ -77,13 +82,22 @@ public class InitialGameScreen {
         ArrayList<Tower> towerPlots = controller.getPlayer().getTowerPlots();
         int rows = controller.getPlayer().getRows();
 
+        Rectangle plot = new Rectangle(50, 50);
+        plot.setFill(Color.BLUE);
+        StackPane monument = new StackPane(plot);
+        plots.add(monument, 0, 0);
+
         int i = 0;
-        for (int row = 0; row < rows; row++) {
-            for (int column = 0; column < 4; column++) {
+        for (int column = 0; column < 12; column++) {
+            for (int row = 0; row < rows; row++) {
                 Tower tower = (i < towerPlots.size()) ? towerPlots.get(i) : null;
                 Pane pane = imageRender.renderPlot(tower);
-                plots.add(pane, column, row);
+                plots.add(pane, column, row + 1);
                 i++;
+            }
+            for (int row = rows; row < 7; row++) {
+                Pane pane = imageRender.renderPlot();
+                plots.add(pane, column, row + 1);
             }
         }
         plots.setHgap(10);
@@ -98,14 +112,16 @@ public class InitialGameScreen {
             reload(root);
 
         });
-        hbox.getChildren().add(clear);
+
+        //Test for end game screen
+        Button tempEndGame = new Button("End the Game");
+        tempEndGame.setOnAction(event -> controller.end());
+
+        hbox.getChildren().addAll(clear, tempEndGame);
         hbox.setAlignment(Pos.BOTTOM_RIGHT);
 
-//        //Test for end game screen
-//        Button tempEndGame = new Button("End the Game");
-//        tempEndGame.setOnAction(event -> controller.end());
-
         vbox.getChildren().addAll(plots, hbox);
+        vbox.setPadding(new Insets(10, 10, 10, 10));
         ScrollPane pane = new ScrollPane(vbox);
         pane.setPadding(new Insets(20, 20, 20, 20));
         return pane;
@@ -164,8 +180,9 @@ public class InitialGameScreen {
 
         root.setCenter(mainPage(root));
         root.setRight(getInventory());
+        root.setTop(header(root));
 
-        Scene scene = new Scene(root, 1000, 380);
+        Scene scene = new Scene(root, 1000, 400);
 
         mainStage.setScene(scene);
         mainStage.setTitle("Tower Defense!");

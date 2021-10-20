@@ -25,23 +25,24 @@ public class TowerMenu {
         Label towerShop = new Label("Purchase a tower here!");
 
         LightTower lightTower = new LightTower(controller.getPlayer().getLevel());
+        ArrayList<LightTower> lTowers = controller.getPlayer().getLTowers();
         Button buyLightTower = new Button("BUY LIGHT TOWER");
         Label buyLightPrice = new Label("$ " + lightTower.getBuyCost());
         Label lightTowerLabel = new Label(lightTower.getDescription());
 
         double currentFunds = controller.getPlayer().getMoney();
-
+        ArrayList<Tower> tPlots = controller.getPlayer().getTowerPlots();
 
         buyLightTower.setOnAction(event -> {
-            ArrayList<LightTower> lTowers = controller.getPlayer().getLTowers();
             if (controller.getPlayer().isFull()) {
                 AlertBox.display("Not Enough Space!", "Either clear your destroyed towers or upgrade them!");
             } else if (currentFunds < lightTower.getBuyCost()) {
                 AlertBox.display("Not Enough Funds!", "You need more money!");
-            } else if (lTowers.get(3) != null) {
+            } else if (tPlots.size() == 36) {
                 AlertBox.display("Too many light towers", "You have reached capacity for light towers!");
             }  else {
-                controller.getPlayer().placeTower(lightTower);
+                lTowers.add(lightTower);
+                tPlots.add(lightTower);
                 controller.getPlayer().setMoney(currentFunds - lightTower.getBuyCost());
                 AlertBox.display("New Balance", "You now have $"
                         + controller.getPlayer().getMoney());
@@ -57,28 +58,32 @@ public class TowerMenu {
                 AlertBox.display("No tower to upgrade!", "You need to have a light tower to upgrade.");
             } else if (currentFunds < lightTower.getUpgradeCost()) {
                 AlertBox.display("Not Enough Funds!", "You need more money!");
-            } else if (mTowers.get(3) != null) {
+            } else if (tPlots.size() == 36) {
                 AlertBox.display("Too many medium towers", "You have reached capacity for medium towers!");
             } else {
-                controller.getPlayer().upgradeLTower(controller.getPlayer().getLTowers().get(0).getUpgradeCost());
+                controller.getPlayer().upgradeLTower(lightTower.getUpgradeCost());
+                controller.getPlayer().setMoney(currentFunds - lightTower.getBuyCost());
+                AlertBox.display("New Balance", "You now have $"
+                        + controller.getPlayer().getMoney());
+                window.close();
             }
         });
 
         MediumTower mediumTower = new MediumTower(controller.getPlayer().getLevel());
+        ArrayList<MediumTower> mTowers = controller.getPlayer().getMTowers();
         Button buyMediumTower = new Button("BUY MEDIUM TOWER");
         Label buyMediumPrice = new Label("$ " + mediumTower.getBuyCost());
         Label mediumTowerLabel = new Label(mediumTower.getDescription());
         buyMediumTower.setOnAction(event -> {
-            ArrayList<MediumTower> mTowers = controller.getPlayer().getMTowers();
             if (controller.getPlayer().isFull()) {
                 AlertBox.display("Not Enough Space!", "Either clear your destroyed towers or upgrade them!");
             } else if (currentFunds < mediumTower.getBuyCost()) {
                 AlertBox.display("Not Enough Funds!", "You need more money!");
-            } else if (mTowers.get(3) != null) {
+            } else if (tPlots.size() == 36) {
                 AlertBox.display("Too many medium towers", "You have reached capacity for medium towers!");
             } else {
-                controller.getPlayer().getMTowers().add(mediumTower);
-                controller.getPlayer().placeTower(mediumTower);
+                mTowers.add(mediumTower);
+                tPlots.add(mediumTower);
                 controller.getPlayer().setMoney(currentFunds - mediumTower.getBuyCost());
                 AlertBox.display("New Balance", "You now have $"
                         + controller.getPlayer().getMoney());
@@ -88,16 +93,20 @@ public class TowerMenu {
 
         Button upgradeMediumTower = new Button("UPGRADE MEDIUM TOWER");
         Label upgradeMediumPrice = new Label("$ " + mediumTower.getUpgradeCost());
-        upgradeLightTower.setOnAction(event -> {
+        upgradeMediumTower.setOnAction(event -> {
             ArrayList<HeavyTower> hTowers = controller.getPlayer().getHTowers();
             if (controller.getPlayer().getMTowers().size() == 0) {
                 AlertBox.display("No tower to upgrade!", "You need to have a medium tower to upgrade.");
-            } else if (hTowers.get(3) != null) {
-                AlertBox.display("Too many heavy towers", "You have reached capacity for heavy towers!");
+            } else if (tPlots.size() == 36) {
+                AlertBox.display("Too many towers", "You have reached capacity for towers!");
             } else if (currentFunds < mediumTower.getUpgradeCost()) {
                 AlertBox.display("Not Enough Funds!", "You need more money!");
             } else {
-                controller.getPlayer().upgradeMTower(controller.getPlayer().getMTowers().get(0).getUpgradeCost());
+                controller.getPlayer().upgradeMTower(mediumTower.getUpgradeCost());
+                controller.getPlayer().setMoney(currentFunds - mediumTower.getBuyCost());
+                AlertBox.display("New Balance", "You now have $"
+                        + controller.getPlayer().getMoney());
+                window.close();
             }
         });
 
@@ -111,10 +120,11 @@ public class TowerMenu {
                 AlertBox.display("Not Enough Space!", "Either clear your destroyed towers or upgrade them!");
             } else if (currentFunds < heavyTower.getBuyCost()) {
                 AlertBox.display("Not Enough Funds!", "You need more money!");
-            } else if (hTowers.get(3) != null) {
-                AlertBox.display("Too many heavy towers", "You have reached capacity for heavy towers!");
+            } else if (tPlots.size() == 36) {
+                AlertBox.display("Too many towers", "You have reached capacity for towers!");
             } else {
-                controller.getPlayer().placeTower(heavyTower);
+                hTowers.add(heavyTower);
+                tPlots.add(heavyTower);
                 controller.getPlayer().setMoney(currentFunds - heavyTower.getBuyCost());
                 AlertBox.display("New Balance", "You now have $"
                         + controller.getPlayer().getMoney());

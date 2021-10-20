@@ -16,9 +16,9 @@ public class Player {
     private ArrayList<HeavyTower> hTowers;
     private ArrayList<Tower> towerPlots;
     private int rows;
-    private int plotCapacity;
 
-    private static final int CAPACITY = 4;
+    private static final int CAPACITY = 12;
+    private static final int PLOTCAPACITY = 36;
 
 
     /**
@@ -28,10 +28,11 @@ public class Player {
      */
     public Player() {
         this("George P. Burdell", Level.EASY);
-        this.monument = new Monument(Level.EASY);
-        this.lTowers = new ArrayList<>(CAPACITY);
-        this.mTowers = new ArrayList<>(CAPACITY);
-        this.hTowers = new ArrayList<>(CAPACITY);
+        monument = new Monument(Level.EASY);
+        lTowers = new ArrayList<>(CAPACITY);
+        mTowers = new ArrayList<>(CAPACITY);
+        hTowers = new ArrayList<>(CAPACITY);
+        towerPlots = new ArrayList<>(PLOTCAPACITY);
 
     }
 
@@ -44,10 +45,11 @@ public class Player {
      */
     public Player(String name) {
         this(name, Level.EASY);
-        this.monument = new Monument(Level.EASY);
-        this.lTowers = new ArrayList<>(CAPACITY);
-        this.mTowers = new ArrayList<>(CAPACITY);
-        this.hTowers = new ArrayList<>(CAPACITY);
+        monument = new Monument(Level.EASY);
+        lTowers = new ArrayList<>(CAPACITY);
+        mTowers = new ArrayList<>(CAPACITY);
+        hTowers = new ArrayList<>(CAPACITY);
+        towerPlots = new ArrayList<>(PLOTCAPACITY);
 
     }
 
@@ -71,13 +73,13 @@ public class Player {
             this.monument = new Monument(Level.HARD);
         }
         this.level = level;
-        this.lTowers = new ArrayList<>(CAPACITY);
-        this.mTowers = new ArrayList<>(CAPACITY);
-        this.hTowers = new ArrayList<>(CAPACITY);
+        lTowers = new ArrayList<>(CAPACITY);
+        mTowers = new ArrayList<>(CAPACITY);
+        hTowers = new ArrayList<>(CAPACITY);
 
         lTowers.add(new LightTower(level));
-        plotCapacity = 12;
-        towerPlots = new ArrayList<>(plotCapacity);
+        towerPlots = new ArrayList<>(PLOTCAPACITY);
+        towerPlots.add(new LightTower(level));
         rows = 3;
 
     }
@@ -150,16 +152,26 @@ public class Player {
 
     public void upgradeLTower(double cost) {
         MediumTower newTower = new MediumTower(level);
-        mTowers.add(mTowers.size(), newTower);
+        for (int i = 0; i < towerPlots.size(); i++) {
+            if (towerPlots.get(i) instanceof LightTower) {
+                towerPlots.set(i, newTower);
+                break;
+            }
+        }
+        mTowers.add(newTower);
         lTowers.remove(0);
-        money -= cost;
     }
 
     public void upgradeMTower(double cost) {
         HeavyTower newTower = new HeavyTower(level);
-        hTowers.add(hTowers.size(), newTower);
-        mTowers.remove(0);
-        money -= cost;
+        for (int i = 0; i < towerPlots.size(); i++) {
+            if (towerPlots.get(i) instanceof MediumTower) {
+                towerPlots.set(i, newTower);
+                break;
+            }
+        }
+        hTowers.add(newTower);
+        mTowers.remove(0);;
     }
 
     /**
@@ -181,28 +193,16 @@ public class Player {
     }
 
     /**
-     * Method to place a tower in the plots.
-     *
-     */
-    public void placeTower(Tower tower) {
-        for (int i = 0; i < towerPlots.size(); i++) {
-            if (towerPlots.get(i) == null) {
-                towerPlots.set(i, tower);
-                break;
-            }
-        }
-    }
-
-    /**
      * Checks if all plots are full
      */
     public boolean isFull() {
         for (Tower t : towerPlots) {
+            System.out.println(t.getClass().getName());
             if (t == null) {
                 return false;
             }
         }
-        return true;
+        return false;
     }
 
     /**

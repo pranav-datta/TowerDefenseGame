@@ -24,7 +24,7 @@ public class MediumTower extends Tower {
 
     @Override
     void attackEnemy() {
-        //decrease enemy health by damage
+        // decrease enemy health by damage
     }
 
     @Override

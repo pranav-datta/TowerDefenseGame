@@ -6,7 +6,7 @@
  * @version 1.0
  */
 
-enum Level {
+public enum Level {
     EASY, INTERMEDIATE, HARD;
 }
 

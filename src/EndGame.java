@@ -1,5 +1,8 @@
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -11,7 +14,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-//import controller.Controller;
 
 /**
  * Game Over Code
@@ -57,28 +59,21 @@ public class EndGame extends Application {
         Background background = new Background(backgroundImage);
         root.setBackground(background);
 
-        // Adding labels
-        Label welcomeLabel = new Label("Game Over");
-        welcomeLabel.setFont(new Font("Arial", 30));
-        welcomeLabel.setTranslateY(30);
-        welcomeLabel.setTextFill(Color.web("##D5634A"));
 
-//        Button welcomeButton = new Button("Start New Game");
-//        welcomeButton.setOnAction(e -> {
-//            stage.hide();
-//            controller.startGameUI();
-//        });
-//        root.setTop(welcomeLabel);
-//        root.setCenter(welcomeButton);
-//
-//        welcomeButton.setPadding(new Insets(15, 15, 15, 15)); // Increase button size
-//        BorderPane.setMargin(welcomeButton, new Insets(10, 10, 440, 10)); // Move button upwards
-//        BorderPane.setAlignment(welcomeButton, Pos.CENTER);
-//        BorderPane.setAlignment(welcomeLabel, Pos.CENTER);
+        Button welcomeButton = new Button("Start New Game");
+        welcomeButton.setOnAction(e -> {
+            stage.hide();
+            controller.startInitialConfig();
+        });
+        root.setCenter(welcomeButton);
+
+        welcomeButton.setPadding(new Insets(15, 15, 15, 15)); // Increase button size
+        BorderPane.setMargin(welcomeButton, new Insets(10, 10, 440, 10)); // Move button upwards
+        BorderPane.setAlignment(welcomeButton, Pos.CENTER);
+
 
         // Create a scene and place it in the stage
         Scene scene = new Scene(root, 300, 100);
-        scene.getStylesheets().add("style/main.css");
         stage.setTitle("Game Over"); // Set the stage title
         stage.setScene(scene); // Place the scene in the stage
         stage.show(); // Display the stage

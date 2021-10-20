@@ -17,19 +17,29 @@ public class ImageRender {
      * @return StackPane representing the plot.
      */
     public Pane renderPlot(Tower tower) {
-        if (tower == null || tower.isDestroyed()) {
+        if (tower == null) {
             return createBlankPlot();
         }
-
-        Color fill = getFill(tower);
-
         if (tower.isDestroyed()) {
             return renderDestroyed(Color.BLACK);
         }
 
-        StackPane pane = new StackPane();
-        Shape background = new Circle(0, 0, 60, fill);
-        pane.getChildren().addAll(createBlankPlot(), background);
+        Color fill = getFill(tower);
+        Circle plot = new Circle(0, 0, 20, fill);
+        StackPane pane = new StackPane(plot);
+
+        return pane;
+    }
+
+    /**
+     * Renders the plots for the map.
+     *
+     * @return StackPane representing the plot.
+     */
+    public Pane renderPlot() {
+        Rectangle plot = new Rectangle(50, 50);
+        plot.setFill(Color.WHITE);
+        StackPane pane = new StackPane(plot);
         return pane;
     }
 
