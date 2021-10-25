@@ -18,7 +18,6 @@ public class Controller extends Application {
     private WelcomeScreen welcome;
     private GameScreen game;
     private EndGame endGame;
-    private Monument monument;
 
     /**
      * Constructor for the Controller.Controller class.
@@ -52,13 +51,6 @@ public class Controller extends Application {
         player = new Player(name, level);
     }
 
-    public void createMonument(Level level) {
-        monument = new Monument(level);
-    }
-
-    public Monument getMonument() {
-        return monument;
-    }
 
     /**
      * Getter for the player object.

@@ -35,14 +35,6 @@ public class GameScreen {
     private VBox header(BorderPane root) {
         Label gameName = new Label("Tower Defense!");
         Text moneyText = new Text("Total money: $" + controller.getPlayer().getMoney());
-        Text pathText = new Text("The path that enemies will travel along will run from the "
-                + "left side of the screen to the right side of the screen, "
-                + "and will have many bends"
-                + " and corners along the way.");
-        Text monumentText = new Text(
-                "The monument that the user will have to protect is a fortified "
-                        + "tower with a king at the top. It is made of stone, "
-                        + "but has many flags and is very ornate.");
         Text monumentHealthText = new Text("Monument health: "
                 + controller.getPlayer().getMonument().getHealth());
 
@@ -52,14 +44,10 @@ public class GameScreen {
             reload(root);
         });
 
-
-
-
         VBox main = new VBox();
         main.setAlignment(Pos.CENTER);
         main.setSpacing(7.5);
-        main.getChildren().addAll(gameName, moneyText, pathText,
-                monumentText, monumentHealthText, towerMenu);
+        main.getChildren().addAll(gameName, moneyText, monumentHealthText, towerMenu);
         return main;
     }
 
@@ -119,7 +107,10 @@ public class GameScreen {
         Button tempEndGame = new Button("End the Game");
         tempEndGame.setOnAction(event -> controller.end());
 
-        hbox.getChildren().addAll(clear, tempEndGame);
+        Button startCombat = new Button("Start Combat");
+        startCombat.setOnAction(event -> combat(root));
+
+        hbox.getChildren().addAll(clear, startCombat, tempEndGame);
         hbox.setAlignment(Pos.BOTTOM_RIGHT);
 
         vbox.getChildren().addAll(plots, hbox);
@@ -189,5 +180,9 @@ public class GameScreen {
         mainStage.setScene(scene);
         mainStage.setTitle("Tower Defense!");
         mainStage.show();
+    }
+
+    public void combat(BorderPane root) {
+
     }
 }
