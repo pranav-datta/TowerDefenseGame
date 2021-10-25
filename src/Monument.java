@@ -38,4 +38,8 @@ public class Monument {
         return health;
     }
 
+    public void setHealth(int newHealth) {
+        this.health = newHealth;
+    }
+
 }

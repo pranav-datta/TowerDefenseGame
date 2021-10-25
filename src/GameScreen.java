@@ -87,7 +87,7 @@ public class GameScreen {
         Rectangle plot = new Rectangle(50, 50);
         plot.setFill(Color.BLUE);
         StackPane monument = new StackPane(plot);
-        plots.add(monument, 0, 0);
+        plots.add(monument, 5, 0);
 
         int i = 0;
         for (int column = 0; column < 12; column++) {

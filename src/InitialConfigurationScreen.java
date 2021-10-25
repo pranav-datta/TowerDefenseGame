@@ -108,6 +108,7 @@ public class InitialConfigurationScreen {
                             e.printStackTrace();
                         }
                         control.createPlayer(name.getText(), level);
+                        control.createMonument(level);
                         control.startGameUI();
                     } else {
                         Alert configAlert = new Alert(Alert.AlertType.ERROR);
