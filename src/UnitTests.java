@@ -3,8 +3,7 @@ import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.testfx.api.FxAssert.verifyThat;
 
 public class UnitTests extends ApplicationTest {
@@ -159,5 +158,31 @@ public class UnitTests extends ApplicationTest {
         clickOn("Access Tower Store");
         clickOn("BUY HEAVY TOWER");
         verifyThat("You now have $425.0", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testBackToWelcome() {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Pranav");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("End the Game");
+        clickOn("Start New Game");
+        verifyThat("Welcome to Tower Defense!", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testGameOverScreen() {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Pranav");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("End the Game");
+        verifyThat("Start New Game", NodeMatchers.isNotNull());
+        verifyThat("Close Game", NodeMatchers.isNotNull());
     }
 }

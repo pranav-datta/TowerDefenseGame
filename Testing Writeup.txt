@@ -1,5 +1,6 @@
 Testing Writeup:
 
+M2:
 Pranav:
 Tested Welcome Screen button to make sure it took the user to the Initial Configuration Screen. The test clicks on the "Click to Start" button and verifies the next page is the Configuration Screen page.
 
@@ -11,3 +12,9 @@ Tested Player one-argument constructor (just Name). This test ensures that the o
 
 Laolu:
 Tested Player constructor and controller to make sure they work together as expected. First created a Player using the two-argument constructor and made sure all the attributes were set accordingly. Then created a Controller object and called its createPlayer method to create a Player that way. Went through the same process of checking the Player's attributes but did so through the Controller object and its getPlayer() method.
+
+M4:
+Pranav:
+-Tested "Start New Game" button to make sure it takes user back to Welcome Screen. The test manually ends the game and selects "Start New Game" and verifies the next page is the Welcome Screen.
+
+-Tested to make sure Game Over Screen has both a "Start New Game" button and a "Close Game" button. The test manually end the game and verifies "Start New Game" and "Close Game" exist

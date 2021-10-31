@@ -61,6 +61,10 @@ public class Controller extends Application {
         return player;
     }
 
+    public void startWelcome() throws Exception {
+        welcome.start(primaryStage);
+    }
+
     /**
      * Transitions from Welcome Screen to Config screen
      */
