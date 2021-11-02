@@ -5,12 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -63,13 +58,25 @@ public class EndGame extends Application {
         Button welcomeButton = new Button("Start New Game");
         welcomeButton.setOnAction(e -> {
             stage.hide();
-            controller.startInitialConfig();
+            try {
+                controller.startWelcomeScreen();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         });
-        root.setCenter(welcomeButton);
+
+        Button endGame = new Button("End Game");
+        endGame.setOnAction(e -> stage.close());
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(welcomeButton, endGame);
+        root.setTop(layout);
 
         welcomeButton.setPadding(new Insets(15, 15, 15, 15)); // Increase button size
-        BorderPane.setMargin(welcomeButton, new Insets(10, 10, 440, 10)); // Move button upwards
-        BorderPane.setAlignment(welcomeButton, Pos.CENTER);
+        endGame.setPadding(new Insets(15, 15, 15, 15)); // Increase button size
+        BorderPane.setMargin(layout, new Insets(10, 10, 440, 10)); // Move buttons upwards
+        BorderPane.setAlignment(layout, Pos.CENTER);
+
 
 
         // Create a scene and place it in the stage

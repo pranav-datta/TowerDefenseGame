@@ -69,6 +69,14 @@ public class Controller extends Application {
     }
 
     /**
+     * Transitions from End Game Screen to Welcome Screen
+     */
+
+    public void startWelcomeScreen() throws Exception{
+        welcome.start(primaryStage);
+    }
+
+    /**
      * Starts the game screen
      */
     public void startGameUI() {
@@ -90,6 +98,13 @@ public class Controller extends Application {
     public void end() {
         primaryStage.hide();
         endGame.start(primaryStage);
+    }
+
+    /**
+     * Starts combat on map
+     */
+    public void startCombat() {
+        // start combat between tower and enemies
     }
 
     ///**

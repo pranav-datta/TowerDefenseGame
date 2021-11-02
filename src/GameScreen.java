@@ -11,11 +11,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameScreen {
     private Controller controller;
     private Stage mainStage;
     private ImageRender imageRender;
+    private ArrayList<Enemy> enemyPlots = new ArrayList<>(51);
 
     /**
      * No-arg constructor for initial game screen
@@ -48,7 +51,7 @@ public class GameScreen {
         Button towerMenu = new Button("Access Tower Store");
         towerMenu.setOnAction(e -> {
             TowerMenu.display(controller);
-            reload(root);
+            reload(root, enemyPlots, controller.getPlayer().getLevel());
         });
 
 
@@ -66,7 +69,8 @@ public class GameScreen {
      *
      * @param root borderpane to reload.
      */
-    public void reload(BorderPane root) {
+    public void reload(BorderPane root, ArrayList<Enemy> enemyPlots, Level level) {
+        addEnemy(enemyPlots, level);
         root.setTop(header(root));
         root.setRight(getInventory());
         root.setCenter(mainPage(root));
@@ -80,26 +84,49 @@ public class GameScreen {
     private ScrollPane mainPage(BorderPane root) {
         GridPane plots = new GridPane();
         ArrayList<Tower> towerPlots = controller.getPlayer().getTowerPlots();
-        int rows = controller.getPlayer().getRows();
 
+
+
+        int i = 0;
+        int j = 0;
+        for (int row = 0; row < 7; row++) {
+            for (int column = 0; column < 12; column++) {
+                if (row == 5 || row == 1) {
+                    if (column < 11) {
+                        Tower tower = (i < towerPlots.size()) ? towerPlots.get(i) : null;
+                        Pane pane = imageRender.renderPlot(tower);
+                        plots.add(pane, column, row + 1);
+                        i++;
+                    } else {
+                        Enemy enemy = (j < enemyPlots.size()) ? enemyPlots.get(j) : null;
+                        Pane pane = imageRender.renderPlot(enemy);
+                        plots.add(pane, column, row + 1);
+                        j++;
+                    }
+                } else if (row == 3) {
+                    if (column > 0) {
+                        Tower tower = (i < towerPlots.size()) ? towerPlots.get(i) : null;
+                        Pane pane = imageRender.renderPlot(tower);
+                        plots.add(pane, column, row + 1);
+                        i++;
+                    } else {
+                        Enemy enemy = (j < enemyPlots.size()) ? enemyPlots.get(j) : null;
+                        Pane pane = imageRender.renderPlot(enemy);
+                        plots.add(pane, column, row + 1);
+                        j++;
+                    }
+                } else {
+                    Enemy enemy = (j < enemyPlots.size()) ? enemyPlots.get(j) : null;
+                    Pane pane = imageRender.renderPlot(enemy);
+                    plots.add(pane, column, row + 1);
+                    j++;
+                }
+            }
+        }
         Rectangle plot = new Rectangle(50, 50);
         plot.setFill(Color.BLUE);
         StackPane monument = new StackPane(plot);
-        plots.add(monument, 0, 0);
-
-        int i = 0;
-        for (int column = 0; column < 12; column++) {
-            for (int row = 0; row < rows; row++) {
-                Tower tower = (i < towerPlots.size()) ? towerPlots.get(i) : null;
-                Pane pane = imageRender.renderPlot(tower);
-                plots.add(pane, column, row + 1);
-                i++;
-            }
-            for (int row = rows; row < 7; row++) {
-                Pane pane = imageRender.renderPlot();
-                plots.add(pane, column, row + 1);
-            }
-        }
+        plots.add(monument, 0, 8);
         plots.setHgap(10);
         plots.setVgap(10);
         plots.setAlignment(Pos.CENTER);
@@ -109,15 +136,20 @@ public class GameScreen {
         Button clear = new Button("Clear destroyed towers");
         clear.setOnAction(e -> {
             controller.getPlayer().clear();
-            reload(root);
+            reload(root, enemyPlots, controller.getPlayer().getLevel());
 
+        });
+
+        Button start = new Button("Start combat");
+        start.setOnAction(e -> {
+            this.startCombat(enemyPlots, controller.getPlayer().getLevel(), plots, root);
         });
 
         //Test for end game screen
         Button tempEndGame = new Button("End the Game");
         tempEndGame.setOnAction(event -> controller.end());
 
-        hbox.getChildren().addAll(clear, tempEndGame);
+        hbox.getChildren().addAll(start, clear, tempEndGame);
         hbox.setAlignment(Pos.BOTTOM_RIGHT);
 
         vbox.getChildren().addAll(plots, hbox);
@@ -128,6 +160,29 @@ public class GameScreen {
     }
 
 
+    public void startCombat(ArrayList<Enemy> enemyPlots, Level level, GridPane plots, BorderPane root) {
+        int i = 0;
+        while (i < 5) {
+            new Timer().scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    addEnemy(enemyPlots, level);
+//                    reload(root);
+                }
+            }, 2000, 2000);
+            i++;
+        }
+    }
+
+    public void addEnemy(ArrayList<Enemy> enemyPlots, Level level) {
+        if (level == Level.EASY) {
+            enemyPlots.add(new LightEnemy());
+        } else if (level == Level.INTERMEDIATE) {
+            enemyPlots.add(new MediumEnemy());
+        }else {
+            enemyPlots.add(new HeavyEnemy());
+        }
+    }
     /**
      * Creates the inventory panel.
      *

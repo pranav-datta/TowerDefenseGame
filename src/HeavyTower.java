@@ -24,8 +24,8 @@ public class HeavyTower extends Tower {
     }
 
     @Override
-    void attackEnemy() {
-        //decrease enemy health by damage
+    void attackEnemy(Enemy enemy) {
+        enemy.setHealth(enemy.getHealth() - damage);
     }
 
     @Override

@@ -41,7 +41,7 @@ public class WelcomeScreen extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         this.stage = stage;
         stage.setMinWidth(950);
         stage.setMinHeight(650);

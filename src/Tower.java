@@ -1,7 +1,7 @@
 public abstract class Tower {
     private boolean destroyed;
 
-    abstract void attackEnemy();
+    abstract void attackEnemy(Enemy enemy);
 
     abstract void setHealth(int newHealth);
 
@@ -17,7 +17,8 @@ public abstract class Tower {
 
     /**
      * Getter for destroyed.
-     * @return  boolean indicating whether tower is removed.
+     *
+     * @return boolean indicating whether tower is removed.
      */
     public boolean isDestroyed() {
         if (this == null) {
@@ -27,12 +28,5 @@ public abstract class Tower {
         }
         return true;
     }
-
-    /**
-     * Identifies the tower on the plot as destroyed.
-     * @param destroyed   value to change destroyed to.
-     */
-    public void setDestroyed(boolean destroyed) {
-        this.destroyed = destroyed;
-    }
 }
+
