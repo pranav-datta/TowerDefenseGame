@@ -72,9 +72,10 @@ public class Controller extends Application {
 
     /**
      * Transitions from End Game Screen to Welcome Screen
+     * @throws Exception exception
      */
 
-    public void startWelcomeScreen() throws Exception{
+    public void startWelcomeScreen() throws Exception {
         welcome.start(primaryStage);
     }
 

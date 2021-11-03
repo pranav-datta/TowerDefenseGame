@@ -1,5 +1,3 @@
-import javafx.scene.layout.GridPane;
-
 import java.util.ArrayList;
 
 /**

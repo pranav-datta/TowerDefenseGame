@@ -56,8 +56,8 @@ public class EndGame extends Application {
         root.setBackground(background);
 
         Text consoleText = new Text(
-                "You suck! Your enemies defeated you. " + '\n' +
-                        "Get better loser, better luck next time hehe.");
+                "You suck! Your enemies defeated you. " + '\n'
+                        + "Get better loser, better luck next time hehe.");
         consoleText.setFill(Color.WHITE);
         Button welcomeButton = new Button("Start New Game");
         welcomeButton.setOnAction(e -> {

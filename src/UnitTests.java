@@ -160,6 +160,8 @@ public class UnitTests extends ApplicationTest {
         verifyThat("You now have $425.0", NodeMatchers.isNotNull());
     }
 
+    //M4 Tests
+
     @Test
     public void testBackToWelcome() {
         clickOn("Click to Start");
@@ -184,5 +186,92 @@ public class UnitTests extends ApplicationTest {
         clickOn("End the Game");
         verifyThat("Start New Game", NodeMatchers.isNotNull());
         verifyThat("End Game", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testMonumentDamage() throws InterruptedException {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Eric");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("Start Combat");
+        Thread.sleep(60000);
+        verifyThat("Monument health: 300", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testEndGameCloseGame() {
+        Controller c = new Controller();
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Eric");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("End the Game");
+        clickOn("End Game");
+        assertNull(c.getPlayer());
+        assertNull(c.getGame());
+    }
+
+    @Test
+    public void testStartCombatButton() {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Laolu");
+        clickOn("Hard");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        verifyThat("Start Combat", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testEndGameRestartValidGame() {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Laolu");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("End the Game");
+        clickOn("Start New Game");
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Dada");
+        clickOn("Intermediate");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        verifyThat("End the Game", NodeMatchers.isNotNull());
+        verifyThat("Start Combat", NodeMatchers.isNotNull());
+        verifyThat("Access Tower Store", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testGameEndAutomatically() throws InterruptedException {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Spencer");
+        clickOn("Hard");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("Start Combat");
+        Thread.sleep(60000);
+        verifyThat("Start New Game", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testBuyTowerWhileGameActive() {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Spencer");
+        clickOn("Hard");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("Start Combat");
+        clickOn("Access Tower Store");
+        clickOn("BUY HEAVY TOWER");
+        verifyThat("You now have $0.0", NodeMatchers.isNotNull());
     }
 }

@@ -1,12 +1,12 @@
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -15,8 +15,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GameScreen {
     private Controller controller;
@@ -62,6 +60,8 @@ public class GameScreen {
      * Reloads the title, inventory, and map.
      *
      * @param root borderpane to reload.
+     * @param enemyPlots enemy plots
+     * @param level current level
      */
     public void reload(BorderPane root, ArrayList<Enemy> enemyPlots, Level level) {
         root.setTop(header(root));
@@ -87,7 +87,6 @@ public class GameScreen {
         if (controller.getPlayer().getMonument().checkIfDestroyed()) {
             move.stop();
             if (count == 0) {
-                // AlertBox.display("Game Over", "Your monument has reached 0 health and the game is over.");
                 controller.end();
                 count++;
             }
@@ -146,22 +145,26 @@ public class GameScreen {
         plots.setAlignment(Pos.CENTER);
         VBox vbox = new VBox(2);
 
-        Rectangle lastPane = (((Rectangle) (((Pane) plots.getChildren().get(83)).getChildren().get(0))));
+        Rectangle lastPane =
+                (((Rectangle) (((Pane) plots.getChildren().get(83)).getChildren().get(0))));
         if (lastPane.getFill().equals(Color.GREEN)) {
-            controller.getPlayer().getMonument().setHealth(controller.getPlayer().getMonument().getHealth() -
-                    new LightEnemy().getDamage());
+            controller.getPlayer().getMonument().setHealth(
+                    controller.getPlayer().getMonument().getHealth()
+                            - new LightEnemy().getDamage());
         } else if (lastPane.getFill() == Color.YELLOW) {
-            controller.getPlayer().getMonument().setHealth(controller.getPlayer().getMonument().getHealth() -
-                    new MediumEnemy().getDamage());
+            controller.getPlayer().getMonument().setHealth(
+                    controller.getPlayer().getMonument().getHealth()
+                            - new MediumEnemy().getDamage());
         } else if (lastPane.getFill() == Color.RED) {
-            controller.getPlayer().getMonument().setHealth(controller.getPlayer().getMonument().getHealth() -
-                    new HeavyEnemy().getDamage());
+            controller.getPlayer().getMonument().setHealth(
+                    controller.getPlayer().getMonument().getHealth()
+                            - new HeavyEnemy().getDamage());
         }
 
         Button tempEndGame = new Button("End the Game");
         tempEndGame.setOnAction(event -> controller.end());
         HBox hbox = new HBox();
-        Button start = new Button("Start combat");
+        Button start = new Button("Start Combat");
         start.setOnAction(e -> {
             this.startCombat(enemyPlots, controller.getPlayer().getLevel(), root);
             move.play();

@@ -14,27 +14,28 @@ Tested Player one-argument constructor (just Name). This test ensures that the o
 Laolu:
 Tested Player constructor and controller to make sure they work together as expected. First created a Player using the two-argument constructor and made sure all the attributes were set accordingly. Then created a Controller object and called its createPlayer method to create a Player that way. Went through the same process of checking the Player's attributes but did so through the Controller object and its getPlayer() method.
 
+
+
 M4:
 Pranav:
 -Tested "Start New Game" button to make sure it takes user back to Welcome Screen. The test manually ends the game and selects "Start New Game" and verifies the next page is the Welcome Screen.
 
 -Tested to make sure Game Over Screen has both a "Start New Game" button and a "End Game" button. The test manually end the game and verifies "Start New Game" and "End Game" exist
 
+
 Eric:
--Tests the application to see if the End Game Screen will automatically pop up if the monument health is manually set to 0. This ensures that the End Game Screen logic is correct.
+-Tests the application to see if the monument gets sufficiently damaged on Easy mode and updates monument health correctly. The test lets one round of the game play and checks the monument health upon completion.
 
 -Tests the Close Game button to ensure that the game exits properly. The test checks to see if controller and player are equal to null.
+
 
 Laolu:
 -Tests the Start Combat button. The test starts a mock game and ensures that the Start Combat button appears correctly when the Game Screen comes up.
 
 -Tests the application to ensure that, upon restarting the game, the resulting game is correct. The test goes through the process of creating a game, ends it, then clicks the Start New Game button. Once the new game is started, the test goes through the same process again and makes sure that the resulting Game Screen comes up properly.
 
-Spencer:
--Tests the end game logic. Runs a sample game and waits until the game is completed then makes sure that the End Game screen is pulled up correctly.
 
-<<<<<<< HEAD
+Spencer:
+-Tests the end game logic. Runs a sample game and waits until the game is completed (by allowing monument to die) then makes sure that the End Game screen is pulled up correctly.
+
 -Tests purchasing a tower while a game is active. The test runs a sample game, buys a heavy tower while the game is running, and ensures that the tower has been bought by checking the resulting money that Player has.
-=======
--Tests purchasing a tower while a game is active. The test runs a sample game, buys a heavy tower while the game is running, and ensures that the tower has been bought by checking the resulting money that Player has.
->>>>>>> 1fb82f5e2ee5bd462360dbb1f844b25c139906c0
