@@ -33,4 +33,8 @@ Laolu:
 Spencer:
 -Tests the end game logic. Runs a sample game and waits until the game is completed then makes sure that the End Game screen is pulled up correctly.
 
+<<<<<<< HEAD
 -Tests purchasing a tower while a game is active. The test runs a sample game, buys a heavy tower while the game is running, and ensures that the tower has been bought by checking the resulting money that Player has.
+=======
+-Tests purchasing a tower while a game is active. The test runs a sample game, buys a heavy tower while the game is running, and ensures that the tower has been bought by checking the resulting money that Player has.
+>>>>>>> 1fb82f5e2ee5bd462360dbb1f844b25c139906c0
