@@ -39,6 +39,7 @@ public class Monument {
     }
 
     public void setHealth(int newHealth) {
+
         health = newHealth;
     }
 
@@ -51,6 +52,8 @@ public class Monument {
             return true;
         }
         return false;
+
+        this.health = newHealth;
     }
 
 }

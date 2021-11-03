@@ -40,6 +40,7 @@ public class GameScreen {
     }
 
     private VBox header(BorderPane root) {
+        Label gameName = new Label("Tower Defense!");
         Text moneyText = new Text("Total money: $" + controller.getPlayer().getMoney());
         Text monumentHealthText = new Text("Monument health: "
                 + controller.getPlayer().getMonument().getHealth());
@@ -54,6 +55,8 @@ public class GameScreen {
         main.setAlignment(Pos.CENTER);
         main.setSpacing(7.5);
         main.getChildren().addAll(moneyText, monumentHealthText, towerMenu);
+        main.getChildren().addAll(gameName, moneyText, monumentHealthText, towerMenu);
+
         return main;
     }
 
@@ -77,6 +80,7 @@ public class GameScreen {
     private ScrollPane mainPage(BorderPane root) {
         GridPane plots = new GridPane();
         ArrayList<Tower> towerPlots = controller.getPlayer().getTowerPlots();
+
         Timeline move = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
             enemyPlots.add(null);
             reload(root, enemyPlots, controller.getPlayer().getLevel());
@@ -89,6 +93,22 @@ public class GameScreen {
                // AlertBox.display("Game Over", "Your monument has reached 0 health and the game is over.");
                 controller.end();
                 count++;
+
+        int rows = controller.getPlayer().getRows();
+
+        Rectangle plot = new Rectangle(50, 50);
+        plot.setFill(Color.BLUE);
+        StackPane monument = new StackPane(plot);
+        plots.add(monument, 5, 0);
+
+        int i = 0;
+        for (int column = 0; column < 12; column++) {
+            for (int row = 0; row < rows; row++) {
+                Tower tower = (i < towerPlots.size()) ? towerPlots.get(i) : null;
+                Pane pane = imageRender.renderPlot(tower);
+                plots.add(pane, column, row + 1);
+                i++;
+
             }
         }
         int i = 0;
@@ -174,8 +194,12 @@ public class GameScreen {
 
         //Test for end game screen
 
-
         hbox.getChildren().addAll(start, clear, tempEndGame);
+
+        Button startCombat = new Button("Start Combat");
+        startCombat.setOnAction(event -> combat(root));
+
+        hbox.getChildren().addAll(clear, startCombat, tempEndGame);
         hbox.setAlignment(Pos.BOTTOM_RIGHT);
 
         vbox.getChildren().addAll(plots, hbox);
@@ -264,5 +288,9 @@ public class GameScreen {
         mainStage.setScene(scene);
         mainStage.setTitle("Tower Defense!");
         mainStage.show();
+    }
+
+    public void combat(BorderPane root) {
+
     }
 }

@@ -20,7 +20,8 @@ public class MediumTower extends Tower {
         }
         if (level == Level.HARD) {
             this.buyCost = 100;
-        }    }
+        }
+    }
 
     @Override
     void attackEnemy(Enemy enemy) {

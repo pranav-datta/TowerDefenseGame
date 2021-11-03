@@ -3,16 +3,15 @@ import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.testfx.api.FxAssert.verifyThat;
 
 public class UnitTests extends ApplicationTest {
+    private Controller controller;
 
     @Override
     public void start(Stage stage) throws Exception {
-        WelcomeScreen welcome = new WelcomeScreen();
-        welcome.start(stage);
+        controller = new Controller(stage);
     }
 
     @Test
@@ -55,11 +54,7 @@ public class UnitTests extends ApplicationTest {
         assertEquals(Level.INTERMEDIATE, c.getPlayer().getLevel());
     }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-///////////////////////            Start M3 Tests              ///////////////////////////////////////////
-//
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //M3 Tests
 
     @Test
     public void testTowerMenuButton() {
@@ -128,7 +123,6 @@ public class UnitTests extends ApplicationTest {
 
     @Test
     public void testBuyLightTower() {
-        Player player1 = new Player("Eric", Level.HARD);
         clickOn("Click to Start");
         clickOn("Input player name");
         write("Eric");
@@ -137,13 +131,11 @@ public class UnitTests extends ApplicationTest {
         clickOn("OK");
         clickOn("Access Tower Store");
         clickOn("BUY LIGHT TOWER");
-        clickOn("CONFIRM");
-        assertEquals(player1.getMoney(), 75, 0);
+        verifyThat("You now have $475.0", NodeMatchers.isNotNull());
     }
 
     @Test
     public void testBuyMediumTower() {
-        Player player1 = new Player("Laolu", Level.HARD);
         clickOn("Click to Start");
         clickOn("Input player name");
         write("Laolu");
@@ -152,13 +144,11 @@ public class UnitTests extends ApplicationTest {
         clickOn("OK");
         clickOn("Access Tower Store");
         clickOn("BUY MEDIUM TOWER");
-        clickOn("CONFIRM");
-        assertEquals(player1.getMoney(), 50, 0);
+        verifyThat("You now have $450.0", NodeMatchers.isNotNull());
     }
 
     @Test
     public void testBuyHeavyTower() {
-        Player player1 = new Player("Laolu", Level.HARD);
         clickOn("Click to Start");
         clickOn("Input player name");
         write("Laolu");
@@ -167,7 +157,32 @@ public class UnitTests extends ApplicationTest {
         clickOn("OK");
         clickOn("Access Tower Store");
         clickOn("BUY HEAVY TOWER");
+        verifyThat("You now have $425.0", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testBackToWelcome() {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Pranav");
+        clickOn("Easy");
         clickOn("CONFIRM");
-        assertEquals(player1.getMoney(), 0, 0);
+        clickOn("OK");
+        clickOn("End the Game");
+        clickOn("Start New Game");
+        verifyThat("Welcome to Tower Defense!", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testGameOverScreen() {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Pranav");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("End the Game");
+        verifyThat("Start New Game", NodeMatchers.isNotNull());
+        verifyThat("Close Game", NodeMatchers.isNotNull());
     }
 }

@@ -173,7 +173,7 @@ public class Player {
             }
         }
         hTowers.add(newTower);
-        mTowers.remove(0);;
+        mTowers.remove(0);
     }
 
     /**
@@ -196,6 +196,7 @@ public class Player {
 
     /**
      * Checks if all plots are full
+     * @return boolean if plot is full or not
      */
     public boolean isFull() {
         for (Tower t : towerPlots) {

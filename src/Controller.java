@@ -52,6 +52,7 @@ public class Controller extends Application {
         player = new Player(name, level);
     }
 
+
     /**
      * Getter for the player object.
      *
@@ -59,6 +60,10 @@ public class Controller extends Application {
      */
     public Player getPlayer() {
         return player;
+    }
+
+    public void startWelcome() throws Exception {
+        welcome.start(primaryStage);
     }
 
     /**
