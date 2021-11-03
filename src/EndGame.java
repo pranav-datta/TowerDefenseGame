@@ -5,6 +5,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+
 import javafx.stage.Stage;
 
 /**
@@ -51,24 +55,38 @@ public class EndGame extends Application {
         Background background = new Background(backgroundImage);
         root.setBackground(background);
 
-
+        Text consoleText = new Text(
+                "You suck! Your enemies defeated you. " + '\n' +
+                        "Get better loser, better luck next time hehe.");
+        consoleText.setFill(Color.WHITE);
         Button welcomeButton = new Button("Start New Game");
         welcomeButton.setOnAction(e -> {
             stage.hide();
             try {
+                controller.startWelcomeScreen();
                 controller.startWelcome();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
+
         Button closeGame = new Button("Close Game");
         closeGame.setOnAction(e -> stage.hide());
         root.setCenter(welcomeButton);
         root.setBottom(closeGame);
+        Button endGame = new Button("End Game");
+        endGame.setOnAction(e -> stage.close());
 
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(consoleText, welcomeButton, endGame);
+        root.setTop(layout);
+        consoleText.setFont(Font.font(30));
         welcomeButton.setPadding(new Insets(15, 15, 15, 15)); // Increase button size
-        BorderPane.setMargin(welcomeButton, new Insets(10, 10, 440, 10)); // Move button upwards
-        BorderPane.setAlignment(welcomeButton, Pos.CENTER);
+        endGame.setPadding(new Insets(15, 15, 15, 15)); // Increase button size
+        BorderPane.setMargin(endGame, new Insets(10, 10, 440, 10)); // Move buttons upwards
+        layout.setAlignment(Pos.CENTER);
+        layout.setSpacing(15);
+
 
         closeGame.setPadding(new Insets(15, 15, 15, 15)); // Increase button size
         BorderPane.setMargin(closeGame, new Insets(10, 10, 440, 10)); // Move button upwards

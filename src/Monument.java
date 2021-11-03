@@ -39,6 +39,20 @@ public class Monument {
     }
 
     public void setHealth(int newHealth) {
+
+        health = newHealth;
+    }
+
+    /**
+     * Getter for destroyed.
+     * @return  boolean indicating whether enemy is dead.
+     */
+    public boolean checkIfDestroyed() {
+        if (health <= 0) {
+            return true;
+        }
+        return false;
+
         this.health = newHealth;
     }
 

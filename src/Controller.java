@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
@@ -74,6 +75,14 @@ public class Controller extends Application {
     }
 
     /**
+     * Transitions from End Game Screen to Welcome Screen
+     */
+
+    public void startWelcomeScreen() throws Exception{
+        welcome.start(primaryStage);
+    }
+
+    /**
      * Starts the game screen
      */
     public void startGameUI() {
@@ -93,9 +102,13 @@ public class Controller extends Application {
      * Shows the game over screen
      */
     public void end() {
-        primaryStage.hide();
+        primaryStage.close();
         endGame.start(primaryStage);
     }
+
+    /**
+     * Starts combat on map
+     */
 
     ///**
     // * Saves the game

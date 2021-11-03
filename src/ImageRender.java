@@ -13,6 +13,24 @@ public class ImageRender {
     /**
      * Renders the plots for the map.
      *
+     * @param enemy tower to add to the map
+     * @return StackPane representing the plot.
+     */
+    public Pane renderPlot(Enemy enemy) {
+        if (enemy == null) {
+            return renderDestroyed();
+        }
+
+        Color fill = getFill(enemy);
+        Rectangle plot = new Rectangle(50, 50);
+        plot.setFill(fill);
+        StackPane pane = new StackPane(plot);
+
+        return pane;
+    }
+    /**
+     * Renders the plots for the map.
+     *
      * @param tower tower to add to the map
      * @return StackPane representing the plot.
      */
@@ -20,10 +38,6 @@ public class ImageRender {
         if (tower == null) {
             return createBlankPlot();
         }
-        if (tower.isDestroyed()) {
-            return renderDestroyed(Color.BLACK);
-        }
-
         Color fill = getFill(tower);
         Circle plot = new Circle(0, 0, 20, fill);
         StackPane pane = new StackPane(plot);
@@ -74,15 +88,32 @@ public class ImageRender {
     }
 
     /**
+     * Our custom ColorPicker.
+     *
+     * @param enemy the enemy whose color we want.
+     * @return returns the color associated with a particular enemy.
+     */
+    public Color getFill(Enemy enemy) {
+        Color fill = null;
+        if (enemy.getName().equals("Light enemy")) {
+            fill = Color.GREEN;
+        } else if (enemy.getName().equals("Medium enemy")) {
+            fill = Color.YELLOW;
+        } else if (enemy.getName().equals("Heavy enemy")) {
+            fill = Color.RED;
+        }
+        return fill;
+    }
+
+    /**
      * Renders destroyed tower
      *
-     * @param fill fill
      * @return pane
      */
-    public Pane renderDestroyed(Color fill) {
-        StackPane pane = new StackPane();
-        Shape background = new Circle(0, 0, 60, fill);
-        pane.getChildren().addAll(createBlankPlot(), background);
+    public Pane renderDestroyed() {
+        Rectangle plot = new Rectangle(50, 50);
+        plot.setFill(Color.WHITE);
+        StackPane pane = new StackPane(plot);
         return pane;
     }
 
