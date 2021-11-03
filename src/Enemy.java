@@ -6,6 +6,8 @@ public abstract class Enemy {
     abstract String getName();
 
     abstract String getDescription();
+
+    abstract int getDamage();
     /**
      * Getter for destroyed.
      * @return  boolean indicating whether enemy is dead.

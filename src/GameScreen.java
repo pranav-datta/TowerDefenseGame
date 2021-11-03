@@ -1,14 +1,18 @@
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -19,7 +23,7 @@ public class GameScreen {
     private Stage mainStage;
     private ImageRender imageRender;
     private ArrayList<Enemy> enemyPlots = new ArrayList<>(51);
-
+    private int count = 0;
     /**
      * No-arg constructor for initial game screen
      */
@@ -37,14 +41,6 @@ public class GameScreen {
 
     private VBox header(BorderPane root) {
         Text moneyText = new Text("Total money: $" + controller.getPlayer().getMoney());
-        Text pathText = new Text("The path that enemies will travel along will run from the "
-                + "left side of the screen to the right side of the screen, "
-                + "and will have many bends"
-                + " and corners along the way.");
-        Text monumentText = new Text(
-                "The monument that the user will have to protect is a fortified "
-                        + "tower with a king at the top. It is made of stone, "
-                        + "but has many flags and is very ornate.");
         Text monumentHealthText = new Text("Monument health: "
                 + controller.getPlayer().getMonument().getHealth());
 
@@ -54,13 +50,10 @@ public class GameScreen {
             reload(root, enemyPlots, controller.getPlayer().getLevel());
         });
 
-
-
-
         VBox main = new VBox();
         main.setAlignment(Pos.CENTER);
         main.setSpacing(7.5);
-        main.getChildren().addAll(moneyText, pathText, monumentText, monumentHealthText, towerMenu);
+        main.getChildren().addAll(moneyText, monumentHealthText, towerMenu);
         return main;
     }
 
@@ -70,11 +63,11 @@ public class GameScreen {
      * @param root borderpane to reload.
      */
     public void reload(BorderPane root, ArrayList<Enemy> enemyPlots, Level level) {
-        addEnemy(enemyPlots, level);
         root.setTop(header(root));
         root.setRight(getInventory());
         root.setCenter(mainPage(root));
     }
+
     /**
      * Creates a scrollpane containing the plot for the map.
      *
@@ -84,42 +77,62 @@ public class GameScreen {
     private ScrollPane mainPage(BorderPane root) {
         GridPane plots = new GridPane();
         ArrayList<Tower> towerPlots = controller.getPlayer().getTowerPlots();
-
-
-
+        Timeline move = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+            enemyPlots.add(null);
+            reload(root, enemyPlots, controller.getPlayer().getLevel());
+        }));
+        move.setCycleCount(Animation.INDEFINITE);
+        move.setDelay(Duration.seconds(7));
+        if (controller.getPlayer().getMonument().checkIfDestroyed()) {
+            move.stop();
+            if (count == 0) {
+               // AlertBox.display("Game Over", "Your monument has reached 0 health and the game is over.");
+                controller.end();
+                count++;
+            }
+        }
         int i = 0;
-        int j = 0;
+        int j = enemyPlots.size() - 1;
         for (int row = 0; row < 7; row++) {
-            for (int column = 0; column < 12; column++) {
-                if (row == 5 || row == 1) {
-                    if (column < 11) {
-                        Tower tower = (i < towerPlots.size()) ? towerPlots.get(i) : null;
-                        Pane pane = imageRender.renderPlot(tower);
-                        plots.add(pane, column, row + 1);
-                        i++;
+            if (row != 2 && row != 6) {
+                for (int column = 0; column < 12; column++) {
+                    if (row == 5 || row == 1) {
+                        if (column < 11) {
+                            Tower tower = (i < towerPlots.size()) ? towerPlots.get(i) : null;
+                            Pane pane = imageRender.renderPlot(tower);
+                            plots.add(pane, column, row);
+                            i++;
+                        } else {
+                            Enemy enemy = (j >= 0) ? enemyPlots.get(j) : null;
+                            Pane pane = imageRender.renderPlot(enemy);
+                            plots.add(pane, column, row);
+                            j--;
+                        }
+                    } else if (row == 3) {
+                        if (column > 0) {
+                            Tower tower = (i < towerPlots.size()) ? towerPlots.get(i) : null;
+                            Pane pane = imageRender.renderPlot(tower);
+                            plots.add(pane, column, row);
+                            i++;
+                        } else {
+                            Enemy enemy = (j >= 0) ? enemyPlots.get(j) : null;
+                            Pane pane = imageRender.renderPlot(enemy);
+                            plots.add(pane, column, row);
+                            j--;
+                        }
                     } else {
-                        Enemy enemy = (j < enemyPlots.size()) ? enemyPlots.get(j) : null;
+                        Enemy enemy = (j >= 0) ? enemyPlots.get(j) : null;
                         Pane pane = imageRender.renderPlot(enemy);
-                        plots.add(pane, column, row + 1);
-                        j++;
+                        plots.add(pane, column, row);
+                        j--;
                     }
-                } else if (row == 3) {
-                    if (column > 0) {
-                        Tower tower = (i < towerPlots.size()) ? towerPlots.get(i) : null;
-                        Pane pane = imageRender.renderPlot(tower);
-                        plots.add(pane, column, row + 1);
-                        i++;
-                    } else {
-                        Enemy enemy = (j < enemyPlots.size()) ? enemyPlots.get(j) : null;
-                        Pane pane = imageRender.renderPlot(enemy);
-                        plots.add(pane, column, row + 1);
-                        j++;
-                    }
-                } else {
-                    Enemy enemy = (j < enemyPlots.size()) ? enemyPlots.get(j) : null;
+                }
+            } else {
+                for (int column = 11; column >= 0; column--) {
+                    Enemy enemy = (j >= 0) ? enemyPlots.get(j) : null;
                     Pane pane = imageRender.renderPlot(enemy);
-                    plots.add(pane, column, row + 1);
-                    j++;
+                    plots.add(pane, column, row);
+                    j--;
                 }
             }
         }
@@ -132,22 +145,35 @@ public class GameScreen {
         plots.setAlignment(Pos.CENTER);
         VBox vbox = new VBox(2);
 
+        Rectangle lastPane = (((Rectangle) (((Pane) plots.getChildren().get(83)).getChildren().get(0))));
+        if (lastPane.getFill().equals(Color.GREEN)) {
+            controller.getPlayer().getMonument().setHealth(controller.getPlayer().getMonument().getHealth() -
+                    new LightEnemy().getDamage());
+        } else if (lastPane.getFill() == Color.YELLOW) {
+            controller.getPlayer().getMonument().setHealth(controller.getPlayer().getMonument().getHealth() -
+                    new MediumEnemy().getDamage());
+        } else if (lastPane.getFill() == Color.RED) {
+            controller.getPlayer().getMonument().setHealth(controller.getPlayer().getMonument().getHealth() -
+                    new HeavyEnemy().getDamage());
+        }
+
+        Button tempEndGame = new Button("End the Game");
+        tempEndGame.setOnAction(event -> controller.end());
         HBox hbox = new HBox();
         Button clear = new Button("Clear destroyed towers");
         clear.setOnAction(e -> {
             controller.getPlayer().clear();
             reload(root, enemyPlots, controller.getPlayer().getLevel());
-
         });
 
         Button start = new Button("Start combat");
         start.setOnAction(e -> {
-            this.startCombat(enemyPlots, controller.getPlayer().getLevel(), plots, root);
+            this.startCombat(enemyPlots, controller.getPlayer().getLevel(), root);
+            move.play();
         });
 
         //Test for end game screen
-        Button tempEndGame = new Button("End the Game");
-        tempEndGame.setOnAction(event -> controller.end());
+
 
         hbox.getChildren().addAll(start, clear, tempEndGame);
         hbox.setAlignment(Pos.BOTTOM_RIGHT);
@@ -160,26 +186,22 @@ public class GameScreen {
     }
 
 
-    public void startCombat(ArrayList<Enemy> enemyPlots, Level level, GridPane plots, BorderPane root) {
-        int i = 0;
-        while (i < 5) {
-            new Timer().scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    addEnemy(enemyPlots, level);
-//                    reload(root);
-                }
-            }, 2000, 2000);
-            i++;
-        }
+    public void startCombat(ArrayList<Enemy> enemyPlots, Level level, BorderPane root) {
+        Timeline begin = new Timeline(new KeyFrame(Duration.seconds(.5), ev -> {
+            addEnemy(enemyPlots, level, root);
+            reload(root, enemyPlots, level);
+        }));
+        begin.setCycleCount(5);
+        begin.play();
     }
 
-    public void addEnemy(ArrayList<Enemy> enemyPlots, Level level) {
-        if (level == Level.EASY) {
+
+    public void addEnemy(ArrayList<Enemy> enemyPlots, Level level, BorderPane root) {
+        if (level == Level.EASY || level == null) {
             enemyPlots.add(new LightEnemy());
         } else if (level == Level.INTERMEDIATE) {
             enemyPlots.add(new MediumEnemy());
-        }else {
+        } else {
             enemyPlots.add(new HeavyEnemy());
         }
     }

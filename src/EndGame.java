@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -54,7 +55,10 @@ public class EndGame extends Application {
         Background background = new Background(backgroundImage);
         root.setBackground(background);
 
-
+        Text consoleText = new Text(
+                "You suck! Your enemies defeated you. " + '\n' +
+                        "Get better loser, better luck next time hehe.");
+        consoleText.setFill(Color.WHITE);
         Button welcomeButton = new Button("Start New Game");
         welcomeButton.setOnAction(e -> {
             stage.hide();
@@ -69,13 +73,14 @@ public class EndGame extends Application {
         endGame.setOnAction(e -> stage.close());
 
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(welcomeButton, endGame);
+        layout.getChildren().addAll(consoleText, welcomeButton, endGame);
         root.setTop(layout);
-
+        consoleText.setFont(Font.font(30));
         welcomeButton.setPadding(new Insets(15, 15, 15, 15)); // Increase button size
         endGame.setPadding(new Insets(15, 15, 15, 15)); // Increase button size
-        BorderPane.setMargin(layout, new Insets(10, 10, 440, 10)); // Move buttons upwards
-        BorderPane.setAlignment(layout, Pos.CENTER);
+        BorderPane.setMargin(endGame, new Insets(10, 10, 440, 10)); // Move buttons upwards
+        layout.setAlignment(Pos.CENTER);
+        layout.setSpacing(15);
 
 
 

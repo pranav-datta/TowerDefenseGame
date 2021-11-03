@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
@@ -96,16 +97,13 @@ public class Controller extends Application {
      * Shows the game over screen
      */
     public void end() {
-        primaryStage.hide();
+        primaryStage.close();
         endGame.start(primaryStage);
     }
 
     /**
      * Starts combat on map
      */
-    public void startCombat() {
-        // start combat between tower and enemies
-    }
 
     ///**
     // * Saves the game
