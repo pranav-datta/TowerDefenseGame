@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
@@ -62,9 +61,6 @@ public class Controller extends Application {
         return player;
     }
 
-    public void startWelcome() throws Exception {
-        welcome.start(primaryStage);
-    }
 
     /**
      * Transitions from Welcome Screen to Config screen

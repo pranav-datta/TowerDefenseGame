@@ -64,16 +64,12 @@ public class EndGame extends Application {
             stage.hide();
             try {
                 controller.startWelcomeScreen();
-                controller.startWelcome();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
 
-        Button closeGame = new Button("Close Game");
-        closeGame.setOnAction(e -> stage.hide());
         root.setCenter(welcomeButton);
-        root.setBottom(closeGame);
         Button endGame = new Button("End Game");
         endGame.setOnAction(e -> stage.close());
 
@@ -94,4 +90,3 @@ public class EndGame extends Application {
         stage.show(); // Display the stage
     }
 }
-
