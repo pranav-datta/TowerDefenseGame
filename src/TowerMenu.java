@@ -58,7 +58,7 @@ public class TowerMenu {
                         "You have reached capacity for medium towers!");
             } else {
                 controller.getPlayer().upgradeLTower(lightTower.getUpgradeCost());
-                controller.getPlayer().setMoney(currentFunds - lightTower.getBuyCost());
+                controller.getPlayer().setMoney(currentFunds - lightTower.getUpgradeCost());
                 AlertBox.display("New Balance", "You now have $"
                         + controller.getPlayer().getMoney());
                 window.close();
@@ -103,7 +103,7 @@ public class TowerMenu {
                         "You need more money!");
             } else {
                 controller.getPlayer().upgradeMTower(mediumTower.getUpgradeCost());
-                controller.getPlayer().setMoney(currentFunds - mediumTower.getBuyCost());
+                controller.getPlayer().setMoney(currentFunds - mediumTower.getUpgradeCost());
                 AlertBox.display("New Balance", "You now have $"
                         + controller.getPlayer().getMoney());
                 window.close();

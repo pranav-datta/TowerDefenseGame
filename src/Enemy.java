@@ -14,14 +14,10 @@ public abstract class Enemy {
         }
         return false;
     }
-  
-    private boolean isKilled;
+
     private int health;
     private int damage;
     abstract void setHealth(int newHealth);
     abstract int getHealth();
-    abstract void attack(Monument monument);
-    abstract void attack(Tower tower);
-    abstract void setKilled(boolean killed);
 
 }

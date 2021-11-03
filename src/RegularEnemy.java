@@ -28,20 +28,4 @@ public class RegularEnemy extends Enemy {
         return this.health;
     }
 
-    @Override
-    void attack(Monument monument) {
-        monument.setHealth(monument.getHealth() - this.damage);
-    }
-
-    @Override
-    void attack(Tower tower) {
-        tower.setHealth(tower.getHealth() - this.damage);
-    }
-
-    @Override
-    void setKilled(boolean killed) {
-        this.isKilled = killed;
-    }
-
-
 }

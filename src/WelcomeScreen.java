@@ -44,7 +44,7 @@ public class WelcomeScreen extends Application {
     public void start(Stage stage) {
         this.stage = stage;
         stage.setMinWidth(950);
-        stage.setMinHeight(650);
+        stage.setMinHeight(680);
         BorderPane root = new BorderPane();
         Image image = new Image("https://lcl.okstate.edu/gogreek/site-files/images/sigma-phi-epsilon_crest-01.png");
 
@@ -83,7 +83,7 @@ public class WelcomeScreen extends Application {
 
 
         // Create a scene and place it in the stage
-        Scene scene = new Scene(root, 300, 100);
+        Scene scene = new Scene(root, 600, 600);
         stage.setTitle("Welcome Page"); // Set the stage title
         stage.setScene(scene); // Place the scene in the stage
         stage.show(); // Display the stage

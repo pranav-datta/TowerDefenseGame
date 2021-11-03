@@ -83,8 +83,6 @@ public class EndGame extends Application {
         layout.setAlignment(Pos.CENTER);
         layout.setSpacing(15);
 
-
-
         // Create a scene and place it in the stage
         Scene scene = new Scene(root, 300, 100);
         stage.setTitle("Game Over"); // Set the stage title
@@ -92,4 +90,3 @@ public class EndGame extends Application {
         stage.show(); // Display the stage
     }
 }
-
