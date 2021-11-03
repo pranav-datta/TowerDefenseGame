@@ -133,7 +133,7 @@ public class UnitTests extends ApplicationTest {
         clickOn("Access Tower Store");
         clickOn("BUY LIGHT TOWER");
         clickOn("CONFIRM");
-        assertEquals(player1.getMoney(), 75, 0);
+        verifyThat("Total money: $475.0", NodeMatchers.isNotNull());
     }
 
     @Test
@@ -148,7 +148,7 @@ public class UnitTests extends ApplicationTest {
         clickOn("Access Tower Store");
         clickOn("BUY MEDIUM TOWER");
         clickOn("CONFIRM");
-        assertEquals(player1.getMoney(), 50, 0);
+        verifyThat("Total money: $450.0", NodeMatchers.isNotNull());
     }
 
     @Test
@@ -163,11 +163,11 @@ public class UnitTests extends ApplicationTest {
         clickOn("Access Tower Store");
         clickOn("BUY HEAVY TOWER");
         clickOn("CONFIRM");
-        assertEquals(player1.getMoney(), 0, 0);
+        verifyThat("Total money: $425.0", NodeMatchers.isNotNull());
     }
 
     //M4 Tests
-    
+
     @Test
     public void testBackToWelcome() {
         clickOn("Click to Start");
