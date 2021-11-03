@@ -64,16 +64,12 @@ public class EndGame extends Application {
             stage.hide();
             try {
                 controller.startWelcomeScreen();
-                controller.startWelcome();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
 
-        Button closeGame = new Button("Close Game");
-        closeGame.setOnAction(e -> stage.hide());
         root.setCenter(welcomeButton);
-        root.setBottom(closeGame);
         Button endGame = new Button("End Game");
         endGame.setOnAction(e -> stage.close());
 
@@ -86,11 +82,6 @@ public class EndGame extends Application {
         BorderPane.setMargin(endGame, new Insets(10, 10, 440, 10)); // Move buttons upwards
         layout.setAlignment(Pos.CENTER);
         layout.setSpacing(15);
-
-
-        closeGame.setPadding(new Insets(15, 15, 15, 15)); // Increase button size
-        BorderPane.setMargin(closeGame, new Insets(10, 10, 440, 10)); // Move button upwards
-        BorderPane.setAlignment(closeGame, Pos.CENTER);
 
 
 

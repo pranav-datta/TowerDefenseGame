@@ -22,6 +22,21 @@ public class HeavyEnemy extends Enemy {
     }
 
     @Override
+    void attack(Monument monument) {
+
+    }
+
+    @Override
+    void attack(Tower tower) {
+
+    }
+
+    @Override
+    void setKilled(boolean killed) {
+
+    }
+
+    @Override
     String getName() {
         return this.name;
     }

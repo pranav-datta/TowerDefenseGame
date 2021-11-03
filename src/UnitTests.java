@@ -183,6 +183,6 @@ public class UnitTests extends ApplicationTest {
         clickOn("OK");
         clickOn("End the Game");
         verifyThat("Start New Game", NodeMatchers.isNotNull());
-        verifyThat("Close Game", NodeMatchers.isNotNull());
+        verifyThat("End Game", NodeMatchers.isNotNull());
     }
 }

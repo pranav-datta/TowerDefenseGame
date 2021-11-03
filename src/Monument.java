@@ -52,8 +52,6 @@ public class Monument {
             return true;
         }
         return false;
-
-        this.health = newHealth;
     }
 
 }

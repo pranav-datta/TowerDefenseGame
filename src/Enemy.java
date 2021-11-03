@@ -1,8 +1,4 @@
 public abstract class Enemy {
-    abstract void setHealth(int newHealth);
-
-    abstract int getHealth();
-
     abstract String getName();
 
     abstract String getDescription();
