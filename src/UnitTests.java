@@ -7,11 +7,11 @@ import static org.junit.Assert.*;
 import static org.testfx.api.FxAssert.verifyThat;
 
 public class UnitTests extends ApplicationTest {
-    private Controller controller;
 
     @Override
     public void start(Stage stage) throws Exception {
-        controller = new Controller(stage);
+        WelcomeScreen welcome = new WelcomeScreen();
+        welcome.start(stage);
     }
 
     @Test
@@ -123,6 +123,7 @@ public class UnitTests extends ApplicationTest {
 
     @Test
     public void testBuyLightTower() {
+        Player player1 = new Player("Eric", Level.HARD);
         clickOn("Click to Start");
         clickOn("Input player name");
         write("Eric");
@@ -131,11 +132,13 @@ public class UnitTests extends ApplicationTest {
         clickOn("OK");
         clickOn("Access Tower Store");
         clickOn("BUY LIGHT TOWER");
-        verifyThat("You now have $475.0", NodeMatchers.isNotNull());
+        clickOn("CONFIRM");
+        assertEquals(player1.getMoney(), 75, 0);
     }
 
     @Test
     public void testBuyMediumTower() {
+        Player player1 = new Player("Laolu", Level.HARD);
         clickOn("Click to Start");
         clickOn("Input player name");
         write("Laolu");
@@ -144,11 +147,13 @@ public class UnitTests extends ApplicationTest {
         clickOn("OK");
         clickOn("Access Tower Store");
         clickOn("BUY MEDIUM TOWER");
-        verifyThat("You now have $450.0", NodeMatchers.isNotNull());
+        clickOn("CONFIRM");
+        assertEquals(player1.getMoney(), 50, 0);
     }
 
     @Test
     public void testBuyHeavyTower() {
+        Player player1 = new Player("Laolu", Level.HARD);
         clickOn("Click to Start");
         clickOn("Input player name");
         write("Laolu");
@@ -157,11 +162,12 @@ public class UnitTests extends ApplicationTest {
         clickOn("OK");
         clickOn("Access Tower Store");
         clickOn("BUY HEAVY TOWER");
-        verifyThat("You now have $425.0", NodeMatchers.isNotNull());
+        clickOn("CONFIRM");
+        assertEquals(player1.getMoney(), 0, 0);
     }
 
     //M4 Tests
-
+    
     @Test
     public void testBackToWelcome() {
         clickOn("Click to Start");
@@ -273,5 +279,7 @@ public class UnitTests extends ApplicationTest {
         clickOn("Access Tower Store");
         clickOn("BUY HEAVY TOWER");
         verifyThat("You now have $0.0", NodeMatchers.isNotNull());
+
     }
 }
+
