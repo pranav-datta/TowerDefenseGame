@@ -87,13 +87,6 @@ public class EndGame extends Application {
         layout.setAlignment(Pos.CENTER);
         layout.setSpacing(15);
 
-
-        closeGame.setPadding(new Insets(15, 15, 15, 15)); // Increase button size
-        BorderPane.setMargin(closeGame, new Insets(10, 10, 440, 10)); // Move button upwards
-        BorderPane.setAlignment(closeGame, Pos.CENTER);
-
-
-
         // Create a scene and place it in the stage
         Scene scene = new Scene(root, 300, 100);
         stage.setTitle("Game Over"); // Set the stage title
