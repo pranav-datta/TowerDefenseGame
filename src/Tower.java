@@ -15,6 +15,14 @@ public abstract class Tower {
 
     abstract double getUpgradeCost();
 
+    abstract int getRow();
+
+    abstract int getCol();
+
+    abstract void setRow(int newRow);
+
+    abstract void setCol(int newCol);
+
     /**
      * Getter for destroyed.
      *

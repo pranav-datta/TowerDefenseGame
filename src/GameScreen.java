@@ -78,12 +78,12 @@ public class GameScreen {
     private ScrollPane mainPage(BorderPane root) {
         GridPane plots = new GridPane();
         ArrayList<Tower> towerPlots = controller.getPlayer().getTowerPlots();
-        Timeline move = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+        Timeline move = new Timeline(new KeyFrame(Duration.seconds(.5), ev -> {
             enemyPlots.add(null);
             reload(root, enemyPlots, controller.getPlayer().getLevel());
         }));
         move.setCycleCount(Animation.INDEFINITE);
-        move.setDelay(Duration.seconds(7));
+        move.setDelay(Duration.seconds(3));
         if (controller.getPlayer().getMonument().checkIfDestroyed()) {
             move.stop();
             if (count == 0) {
@@ -100,11 +100,19 @@ public class GameScreen {
                         if (column < 11) {
                             Tower tower = (i < towerPlots.size()) ? towerPlots.get(i) : null;
                             Pane pane = imageRender.renderPlot(tower);
+                            if (tower != null) {
+                                tower.setRow(row);
+                                tower.setCol(column);
+                            }
                             plots.add(pane, column, row);
                             i++;
                         } else {
                             Enemy enemy = (j >= 0) ? enemyPlots.get(j) : null;
                             Pane pane = imageRender.renderPlot(enemy);
+                            if (enemy != null) {
+                                enemy.setRow(row);
+                                enemy.setCol(column);
+                            }
                             plots.add(pane, column, row);
                             j--;
                         }
@@ -112,17 +120,29 @@ public class GameScreen {
                         if (column > 0) {
                             Tower tower = (i < towerPlots.size()) ? towerPlots.get(i) : null;
                             Pane pane = imageRender.renderPlot(tower);
+                            if (tower != null) {
+                                tower.setRow(row);
+                                tower.setCol(column);
+                            }
                             plots.add(pane, column, row);
                             i++;
                         } else {
                             Enemy enemy = (j >= 0) ? enemyPlots.get(j) : null;
                             Pane pane = imageRender.renderPlot(enemy);
+                            if (enemy != null) {
+                                enemy.setRow(row);
+                                enemy.setCol(column);
+                            }
                             plots.add(pane, column, row);
                             j--;
                         }
                     } else {
                         Enemy enemy = (j >= 0) ? enemyPlots.get(j) : null;
                         Pane pane = imageRender.renderPlot(enemy);
+                        if (enemy != null) {
+                            enemy.setRow(row);
+                            enemy.setCol(column);
+                        }
                         plots.add(pane, column, row);
                         j--;
                     }
@@ -131,11 +151,31 @@ public class GameScreen {
                 for (int column = 11; column >= 0; column--) {
                     Enemy enemy = (j >= 0) ? enemyPlots.get(j) : null;
                     Pane pane = imageRender.renderPlot(enemy);
+                    if (enemy != null) {
+                        enemy.setRow(row);
+                        enemy.setCol(column);
+                    }
                     plots.add(pane, column, row);
                     j--;
                 }
             }
         }
+        for (int e = 0; e < enemyPlots.size(); e++) {
+            for (Tower t : towerPlots) {
+                if (enemyPlots.get(e) != null && t != null) {
+                    if (enemyPlots.get(e).getCol() == t.getCol()
+                            && (enemyPlots.get(e).getRow() == t.getRow() + 1
+                            || enemyPlots.get(e).getRow() == t.getRow() - 1)) {
+                        t.attackEnemy(enemyPlots.get(e));
+                    }
+                }
+            }
+            if (enemyPlots.get(e) != null && enemyPlots.get(e).getHealth() <= 0) {
+                enemyPlots.remove(enemyPlots.get(e));
+                controller.getPlayer().setMoney(controller.getPlayer().getMoney() + 50);
+            }
+        }
+
         Rectangle plot = new Rectangle(50, 50);
         plot.setFill(Color.BLUE);
         StackPane monument = new StackPane(plot);
@@ -147,20 +187,22 @@ public class GameScreen {
 
         Rectangle lastPane =
                 (((Rectangle) (((Pane) plots.getChildren().get(83)).getChildren().get(0))));
-        if (lastPane.getFill().equals(Color.GREEN)) {
-            controller.getPlayer().getMonument().setHealth(
-                    controller.getPlayer().getMonument().getHealth()
-                            - new LightEnemy().getDamage());
-        } else if (lastPane.getFill() == Color.YELLOW) {
-            controller.getPlayer().getMonument().setHealth(
-                    controller.getPlayer().getMonument().getHealth()
-                            - new MediumEnemy().getDamage());
-        } else if (lastPane.getFill() == Color.RED) {
-            controller.getPlayer().getMonument().setHealth(
-                    controller.getPlayer().getMonument().getHealth()
-                            - new HeavyEnemy().getDamage());
+        if (!lastPane.getFill().equals(Color.WHITE)) {
+            Color lastColor = (Color) lastPane.getFill();
+            if (lastColor.getGreen() * 255 == 255 && lastColor.getRed() * 255 < 255) {
+                controller.getPlayer().getMonument().setHealth(
+                        controller.getPlayer().getMonument().getHealth()
+                                - new LightEnemy().getDamage());
+            } else if (lastColor.getGreen() * 255 == 255 && lastColor.getRed() * 255 == 255) {
+                controller.getPlayer().getMonument().setHealth(
+                        controller.getPlayer().getMonument().getHealth()
+                                - new MediumEnemy().getDamage());
+            } else if (lastColor.getRed() * 255 == 255 && lastColor.getGreen() * 255 < 255) {
+                controller.getPlayer().getMonument().setHealth(
+                        controller.getPlayer().getMonument().getHealth()
+                                - new HeavyEnemy().getDamage());
+            }
         }
-
         Button tempEndGame = new Button("End the Game");
         tempEndGame.setOnAction(event -> controller.end());
         HBox hbox = new HBox();

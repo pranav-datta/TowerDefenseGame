@@ -17,6 +17,12 @@ public abstract class Enemy {
 
     private int health;
     private int damage;
+    private int row;
+    private int col;
+    abstract int getRow();
+    abstract int getCol();
+    abstract void setRow(int newRow);
+    abstract void setCol(int newCol);
     abstract void setHealth(int newHealth);
     abstract int getHealth();
 

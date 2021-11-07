@@ -2,6 +2,8 @@ public class RegularEnemy extends Enemy {
     private boolean isKilled;
     private int health;
     private int damage;
+    private int row;
+    private int col;
 
     @Override
     String getName() {
@@ -28,4 +30,23 @@ public class RegularEnemy extends Enemy {
         return this.health;
     }
 
+    @Override
+    int getRow() {
+        return this.row;
+    }
+
+    @Override
+    int getCol() {
+        return this.col;
+    }
+
+    @Override
+    void setRow(int newRow) {
+        this.row = newRow;
+    }
+
+    @Override
+    void setCol(int newCol) {
+        this.col = newCol;
+    }
 }
