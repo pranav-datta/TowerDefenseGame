@@ -95,11 +95,11 @@ public class ImageRender {
     public Color getFill(Enemy enemy) {
         Color fill = null;
         if (enemy.getName().equals("Light enemy")) {
-            fill = Color.rgb((150-enemy.getHealth()), 255, (150-enemy.getHealth()));
+            fill = Color.rgb((150 - enemy.getHealth()), 255, (150 - enemy.getHealth()));
         } else if (enemy.getName().equals("Medium enemy")) {
-            fill = Color.rgb(255, 255, (250-enemy.getHealth()));
+            fill = Color.rgb(255, 255, (250 - enemy.getHealth()));
         } else if (enemy.getName().equals("Heavy enemy")) {
-            fill = Color.rgb(255, (250-(enemy.getHealth()/2)), (250-(enemy.getHealth()/2)));
+            fill = Color.rgb(255, (250 - (enemy.getHealth() / 2)), (250 - (enemy.getHealth() / 2)));
         }
         return fill;
     }

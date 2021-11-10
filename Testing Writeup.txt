@@ -39,3 +39,17 @@ Spencer:
 -Tests the end game logic. Runs a sample game and waits until the game is completed (by allowing monument to die) then makes sure that the End Game screen is pulled up correctly.
 
 -Tests purchasing a tower while a game is active. The test runs a sample game, buys a heavy tower while the game is running, and ensures that the tower has been bought by checking the resulting money that Player has.
+
+
+M5:
+
+Pranav:
+-Tested money gain implementation. The test starts a game and buys a heavy tower that kills the light enemies and makes sure money is gained.
+
+-Tested tower attacking enemies. The test starts a game and buys a heavy tower and makes sure the enemies are killed.
+
+*REMAINING TESTS*
+-test that you can buy tower during combat (literally copy and paste test from last milestone)
+-test that monument takes different damage from enemies (3 tests: easy, intermediate, and hard)
+-test that enemies can take damage without being killed
+-test that you can buy more towers after a round is over
