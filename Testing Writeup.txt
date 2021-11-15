@@ -44,12 +44,21 @@ Spencer:
 M5:
 
 Pranav:
--Tested money gain implementation. The test starts a game and buys a heavy tower that kills the light enemies and makes sure money is gained.
+-Tested money gain implementation. The test starts an easy game and buys a heavy tower that kills the light enemies and makes sure money is gained.
 
 -Tested tower attacking enemies. The test starts a game and buys a heavy tower and makes sure the enemies are killed.
 
-*REMAINING TESTS*
--test that you can buy tower during combat (literally copy and paste test from last milestone)
--test that monument takes different damage from enemies (3 tests: easy, intermediate, and hard)
--test that enemies can take damage without being killed
--test that you can buy more towers after a round is over
+Eric:
+- Tests that money is incremented properly after a heavy tower is bought and enemies are killed. Test starts a hard game, buys a heavy tower, waits, and checks the updated money amount.
+
+- Tests monument damage implementation. Test starts a game in easy mode, waits for the game to run, and for the enemies to reach the monument. Checks that monument health is properly decremented.
+
+Laolu:
+- Tests proper updating of monument health. Test starts a game in intermediate mode, waits for the game to run and for the enemies to reach the monument. Checks that the game ends because the monument health has reached 0.
+
+- Tests that the buy tower implementation is correct after a round ends. Test starts a game, ends it, starts another game, starts combat, then buys a heavy tower and ensures that the tower has been properly purchased.
+
+Spencer:
+- Tests money gain implementation in the intermediate level. The test starts an intermediate game and buys a heavy tower that kills enemies and makes sure money is properly gained.
+
+- Tests proper updating of monument health for a level in hard mode. Test starts a game in hard mode, waits for the game to run and for the enemies to reach the monument. Checks that monument health reaches 0 and that the game ends when this happens.

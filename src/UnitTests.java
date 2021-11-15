@@ -279,7 +279,6 @@ public class UnitTests extends ApplicationTest {
         clickOn("Access Tower Store");
         clickOn("BUY HEAVY TOWER");
         verifyThat("You now have $0.0", NodeMatchers.isNotNull());
-
     }
 }
 
