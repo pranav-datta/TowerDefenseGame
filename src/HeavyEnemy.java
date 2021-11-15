@@ -7,7 +7,7 @@ public class HeavyEnemy extends Enemy {
     private int col;
 
     public HeavyEnemy() {
-        this.health = 500;
+        this.health = 300;
         this.name = "Heavy enemy";
         this.description = "Strongest of 'em all. It's gonna take a lot to get rid of him";
         this.damage = 60;

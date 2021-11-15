@@ -58,7 +58,7 @@ public class M5UnitTests extends ApplicationTest {
         clickOn("BUY HEAVY TOWER");
         clickOn("CONFIRM");
         clickOn("Start Combat");
-        Thread.sleep(5000);
+        Thread.sleep(15000);
         verifyThat("Total money: $250.0", NodeMatchers.isNotNull());
     }
 
@@ -71,7 +71,7 @@ public class M5UnitTests extends ApplicationTest {
         clickOn("CONFIRM");
         clickOn("OK");
         clickOn("Start Combat");
-        Thread.sleep(60000);
+        Thread.sleep(30000);
         verifyThat("Monument health: 300", NodeMatchers.isNotNull());
     }
 
@@ -84,13 +84,13 @@ public class M5UnitTests extends ApplicationTest {
         clickOn("CONFIRM");
         clickOn("OK");
         clickOn("Start Combat");
-        Thread.sleep(60000);
+        Thread.sleep(30000);
         //verifyThat("Monument health: 0", NodeMatchers.isNotNull());
         verifyThat("Start New Game", NodeMatchers.isNotNull());
     }
 
     @Test
-    public void testBuyTowerAfterRoundEnds() throws InterruptedException {
+    public void testBuyTowerAfterRoundEnds() {
         clickOn("Click to Start");
         clickOn("Input player name");
         write("Laolu");
@@ -102,14 +102,14 @@ public class M5UnitTests extends ApplicationTest {
         clickOn("Click to Start");
         clickOn("Input player name");
         write("Dada");
-        clickOn("Easy");
+        clickOn("Hard");
         clickOn("CONFIRM");
         clickOn("OK");
         clickOn("Start Combat");
         clickOn("Access Tower Store");
         clickOn("BUY HEAVY TOWER");
         clickOn("CONFIRM");
-        verifyThat("Total money: $425.0", NodeMatchers.isNotNull());
+        verifyThat("Total money: $0.0", NodeMatchers.isNotNull());
     }
 
     @Test
@@ -124,7 +124,7 @@ public class M5UnitTests extends ApplicationTest {
         clickOn("BUY HEAVY TOWER");
         clickOn("CONFIRM");
         clickOn("Start Combat");
-        Thread.sleep(5000);
+        Thread.sleep(15000);
         verifyThat("Total money: $400.0", NodeMatchers.isNotNull());
     }
 
@@ -137,7 +137,7 @@ public class M5UnitTests extends ApplicationTest {
         clickOn("CONFIRM");
         clickOn("OK");
         clickOn("Start Combat");
-        Thread.sleep(60000);
+        Thread.sleep(30000);
         //verifyThat("Monument health: 0", NodeMatchers.isNotNull());
         verifyThat("Start New Game", NodeMatchers.isNotNull());
     }
