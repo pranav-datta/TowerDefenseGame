@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  * @author Spencer Kim
  * @version 1.0
  */
-public class EndGame extends Application {
+public class WinScreen extends Application {
     private Stage stage;
     private Controller controller;
 
@@ -26,14 +26,14 @@ public class EndGame extends Application {
      *
      * @param controller for controller object
      */
-    public EndGame(Controller controller) {
+    public WinScreen(Controller controller) {
         this.controller = controller;
     }
 
     /**
      * Welcome screen construction to launch.
      */
-    public EndGame() {
+    public WinScreen() {
     } // no-arg constructor to launch.
 
     public void start(Stage stage) {
@@ -42,7 +42,7 @@ public class EndGame extends Application {
         stage.setMinHeight(650);
         BorderPane root = new BorderPane();
 
-        Image image = new Image("https://image.freepik.com/free-vector/game-with-glitch-effect_225004-661.jpg");
+        Image image = new Image("https://media.istockphoto.com/videos/you-win-game-screen-video-id1185664467?s=640x640");
 
         //Background image
         BackgroundSize backgroundSize = new BackgroundSize(200, 200, true, true, true, true);
@@ -56,9 +56,7 @@ public class EndGame extends Application {
         Background background = new Background(backgroundImage);
         root.setBackground(background);
 
-        Text consoleText = new Text(
-                "You suck! Your enemies defeated you. " + '\n'
-                        + "Get better loser, better luck next time hehe.");
+        Text consoleText = new Text("YOU WON THE GAME");
         consoleText.setFill(Color.WHITE);
         Button welcomeButton = new Button("Start New Game");
         welcomeButton.setOnAction(e -> {
@@ -78,9 +76,9 @@ public class EndGame extends Application {
         Label timePlayed = new Label("Time Played: " + ((int) controller.getStats().getTimePlayed()));
         Label enemiesKilled = new Label("Enemies Killed: " + controller.getStats().getEnemiesKilled());
 
-        damageTaken.setTextFill(Color.RED);
-        timePlayed.setTextFill(Color.RED);
-        enemiesKilled.setTextFill(Color.RED);
+        damageTaken.setTextFill(Color.WHITE);
+        timePlayed.setTextFill(Color.WHITE);
+        enemiesKilled.setTextFill(Color.WHITE);
 
         VBox layout = new VBox(10);
         layout.getChildren().addAll(consoleText, welcomeButton, endGame, damageTaken, timePlayed, enemiesKilled);
@@ -94,7 +92,7 @@ public class EndGame extends Application {
 
         // Create a scene and place it in the stage
         Scene scene = new Scene(root, 300, 100);
-        stage.setTitle("Game Over"); // Set the stage title
+        stage.setTitle("Win Game"); // Set the stage title
         stage.setScene(scene); // Place the scene in the stage
         stage.show(); // Display the stage
     }

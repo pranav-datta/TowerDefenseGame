@@ -84,6 +84,7 @@ public class GameScreen {
         }));
         move.setCycleCount(Animation.INDEFINITE);
         move.setDelay(Duration.seconds(3));
+        controller.getStats().setTimePlayed(controller.getStats().getTimePlayed() + 0.5);
         if (controller.getPlayer().getMonument().checkIfDestroyed()) {
             move.stop();
             if (count == 0) {
@@ -173,6 +174,7 @@ public class GameScreen {
             if (enemyPlots.get(e) != null && enemyPlots.get(e).getHealth() <= 0) {
                 enemyPlots.remove(enemyPlots.get(e));
                 controller.getPlayer().setMoney(controller.getPlayer().getMoney() + 50);
+                controller.getStats().setEnemiesKilled(controller.getStats().getEnemiesKilled() + 1);
             }
         }
 
@@ -193,14 +195,20 @@ public class GameScreen {
                 controller.getPlayer().getMonument().setHealth(
                         controller.getPlayer().getMonument().getHealth()
                                 - new LightEnemy().getDamage());
+                controller.getStats().setDamageTaken(controller.getStats().getDamageTaken()
+                        + new LightEnemy().getDamage());
             } else if (lastColor.getGreen() * 255 == 255 && lastColor.getRed() * 255 == 255) {
                 controller.getPlayer().getMonument().setHealth(
                         controller.getPlayer().getMonument().getHealth()
                                 - new MediumEnemy().getDamage());
+                controller.getStats().setDamageTaken(controller.getStats().getDamageTaken()
+                        + new MediumEnemy().getDamage());
             } else if (lastColor.getRed() * 255 == 255 && lastColor.getGreen() * 255 < 255) {
                 controller.getPlayer().getMonument().setHealth(
                         controller.getPlayer().getMonument().getHealth()
                                 - new HeavyEnemy().getDamage());
+                controller.getStats().setDamageTaken(controller.getStats().getDamageTaken()
+                        + new HeavyEnemy().getDamage());
             }
         }
         Button tempEndGame = new Button("End the Game");
@@ -270,8 +278,12 @@ public class GameScreen {
         Label mTowerCount = new Label("Medium Towers Count: " + numMTowers);
         Label hTowerCount = new Label("Heavy Towers Count: " + numHTowers);
         Label tTowerCount = new Label("Total Towers Count: " + totalTowers);
+        Label damageTaken = new Label("Damage Taken: " + controller.getStats().getDamageTaken());
+        Label timePlayed = new Label("Time Played: " + ((int) controller.getStats().getTimePlayed()));
+        Label enemiesKilled = new Label("Enemies Killed: " + controller.getStats().getEnemiesKilled());
 
-        inventoryContents.getChildren().addAll(lTowerCount, mTowerCount, hTowerCount, tTowerCount);
+        inventoryContents.getChildren().addAll(lTowerCount, mTowerCount, hTowerCount, tTowerCount,
+                damageTaken, timePlayed, enemiesKilled);
 
         VBox inventoryPanel = new VBox(10);
         inventoryPanel.getChildren().addAll(inventoryHeader, inventoryContents);

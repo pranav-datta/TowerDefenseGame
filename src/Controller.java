@@ -18,6 +18,8 @@ public class Controller extends Application {
     private WelcomeScreen welcome;
     private GameScreen game;
     private EndGame endGame;
+    private Statistics stats;
+    private WinScreen winScreen;
 
     /**
      * Constructor for the Controller.Controller class.
@@ -32,6 +34,8 @@ public class Controller extends Application {
         welcome.start(primaryStage);
         game = new GameScreen(this);
         endGame = new EndGame(this);
+        stats = new Statistics();
+        winScreen = new WinScreen(this);
     }
 
     /**
@@ -101,6 +105,15 @@ public class Controller extends Application {
     public void end() {
         primaryStage.close();
         endGame.start(primaryStage);
+    }
+
+    public void win() {
+        primaryStage.close();
+        winScreen.start(primaryStage);
+    }
+
+    public Statistics getStats() {
+        return this.stats;
     }
 
     /**
