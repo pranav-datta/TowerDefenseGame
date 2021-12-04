@@ -84,7 +84,7 @@ public class GameScreen {
         }));
         move.setCycleCount(Animation.INDEFINITE);
         move.setDelay(Duration.seconds(3));
-        controller.getStats().setTimePlayed(controller.getStats().getTimePlayed() + 0.5);
+
         if (controller.getPlayer().getMonument().checkIfDestroyed()) {
             move.stop();
             if (count == 0) {
@@ -92,6 +92,21 @@ public class GameScreen {
                 count++;
             }
         }
+        Timeline moveBoss = new Timeline(new KeyFrame(Duration.seconds(0.5), ev -> {
+            enemyPlots.add(null);
+            reload(root, enemyPlots, controller.getPlayer().getLevel());
+        }));
+        moveBoss.setCycleCount(Animation.INDEFINITE);
+        controller.getStats().setTimePlayed(controller.getStats().getTimePlayed() + 0.5);
+
+        if (controller.getStats().getTimePlayed() == 5) {
+            move.stop();
+            enemyPlots.clear();
+            addFinalEnemy(enemyPlots, controller.getPlayer().getLevel(), root);
+            reload(root, enemyPlots, controller.getPlayer().getLevel());
+            moveBoss.play();
+        }
+
         int i = 0;
         int j = enemyPlots.size() - 1;
         for (int row = 0; row < 7; row++) {
@@ -209,6 +224,12 @@ public class GameScreen {
                                 - new HeavyEnemy().getDamage());
                 controller.getStats().setDamageTaken(controller.getStats().getDamageTaken()
                         + new HeavyEnemy().getDamage());
+            } else {
+                controller.getPlayer().getMonument().setHealth(
+                        controller.getPlayer().getMonument().getHealth()
+                                - new FinalEnemy().getDamage());
+                controller.getStats().setDamageTaken(controller.getStats().getDamageTaken()
+                        + new FinalEnemy().getDamage());
             }
         }
         Button tempEndGame = new Button("End the Game");
@@ -251,6 +272,20 @@ public class GameScreen {
             enemyPlots.add(new HeavyEnemy());
         }
     }
+
+    public void spawnFinalEnemy(ArrayList<Enemy> enemyPlots, Level level, BorderPane root) {
+        Timeline enemy = new Timeline(new KeyFrame(Duration.seconds(.5), ev -> {
+            addFinalEnemy(enemyPlots, level, root);
+            reload(root, enemyPlots, level);
+        }));
+        enemy.setCycleCount(1);
+        enemy.play();
+    }
+
+    public void addFinalEnemy(ArrayList<Enemy> enemyPlots, Level level, BorderPane root) {
+        enemyPlots.add(new FinalEnemy());
+    }
+
     /**
      * Creates the inventory panel.
      *

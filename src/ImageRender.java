@@ -100,6 +100,8 @@ public class ImageRender {
             fill = Color.rgb(255, 255, (250 - enemy.getHealth()));
         } else if (enemy.getName().equals("Heavy enemy")) {
             fill = Color.rgb(255, (250 - (enemy.getHealth() / 2)), (250 - (enemy.getHealth() / 2)));
+        } else if (enemy.getName().equals("Final enemy")) {
+            fill = Color.rgb(0, 0, 0);
         }
         return fill;
     }
