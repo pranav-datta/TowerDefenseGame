@@ -62,3 +62,16 @@ Spencer:
 - Tests money gain implementation in the intermediate level. The test starts an intermediate game and buys a heavy tower that kills enemies and makes sure money is properly gained.
 
 - Tests proper updating of monument health for a level in hard mode. Test starts a game in hard mode, waits for the game to run and for the enemies to reach the monument. Checks that monument health reaches 0 and that the game ends when this happens.
+
+
+M6:
+
+Pranav:
+- Tests upgrading a light tower. Test starts a game on Easy mode and verifies the upgrade of the already existing light tower to a medium tower.
+
+- Tests statistics appearing on end game screen. Test starts a game, ends it, and makes sure statistics appear on the end game screen.
+
+Spencer:
+- Tests upgrading a medium tower. Test starts a game on Easy mode, buys a medium tower, and verifies the upgrade of the medium tower to a heavy tower.
+
+- Tests that only one tower gets upgraded at a time. Test starts a game on Easy mode, buys a light tower, and verifies that only one tower gets upgraded when the option is selected.
