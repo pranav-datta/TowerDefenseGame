@@ -75,3 +75,13 @@ Spencer:
 - Tests upgrading a medium tower. Test starts a game on Easy mode, buys a medium tower, and verifies the upgrade of the medium tower to a heavy tower.
 
 - Tests that only one tower gets upgraded at a time. Test starts a game on Easy mode, buys a light tower, and verifies that only one tower gets upgraded when the option is selected.
+
+Laolu:
+- Tests the final boss destroying the monument. Test starts a game on Easy mode, waits for the final boss to show up and lets it destroy the monument and verifies the end game screen appears
+
+- Tests the win screen appearing after final boss is killed. Test starts a game on Easy mode, buys a couple of heavy towers, waits for the final boss to show up and then kills it, verifying the win screen appears.
+
+Eric: 
+- Tests that statistics appear on win screen. Test starts a game on Easy mode, buys a couple of heavy towers, waits for the final boss to show up and then kills it, verifying the win screen appears with statistics.
+
+- Tests that you can start a new game from win screen. Test starts a game on Easy mode, buys a couple of heavy towers, waits for the final boss to show up and then kills it, verifying you can start a new game from win screen.
