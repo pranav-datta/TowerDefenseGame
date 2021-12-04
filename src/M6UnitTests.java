@@ -74,5 +74,98 @@ public class M6UnitTests extends ApplicationTest {
         verifyThat("Medium Towers Count: 1", NodeMatchers.isNotNull());
     }
 
+    @Test
+    public void testFinalBossLose() throws InterruptedException {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Spencer");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("Start Combat");
+        Thread.sleep(90000);
+        verifyThat("Start New Game", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testFinalBossWin() throws InterruptedException {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Spencer");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("Start Combat");
+        clickOn("Access Tower Store");
+        clickOn("BUY HEAVY TOWER");
+        clickOn("CONFIRM");
+        Thread.sleep(1000);
+        clickOn("Access Tower Store");
+        clickOn("BUY HEAVY TOWER");
+        clickOn("CONFIRM");
+        Thread.sleep(1000);
+        clickOn("Access Tower Store");
+        clickOn("BUY HEAVY TOWER");
+        clickOn("CONFIRM");
+        Thread.sleep(60000);
+        verifyThat("YOU WON THE GAME", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testFinalBossStatistics() throws InterruptedException {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Spencer");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("Start Combat");
+        clickOn("Access Tower Store");
+        clickOn("BUY HEAVY TOWER");
+        clickOn("CONFIRM");
+        Thread.sleep(1000);
+        clickOn("Access Tower Store");
+        clickOn("BUY HEAVY TOWER");
+        clickOn("CONFIRM");
+        Thread.sleep(1000);
+        clickOn("Access Tower Store");
+        clickOn("BUY HEAVY TOWER");
+        clickOn("CONFIRM");
+        Thread.sleep(1000);
+        clickOn("Access Tower Store");
+        clickOn("BUY HEAVY TOWER");
+        clickOn("CONFIRM");
+        Thread.sleep(60000);
+        verifyThat("Enemies Killed: 6", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void startNewGameWin() throws InterruptedException {
+        clickOn("Click to Start");
+        clickOn("Input player name");
+        write("Spencer");
+        clickOn("Easy");
+        clickOn("CONFIRM");
+        clickOn("OK");
+        clickOn("Start Combat");
+        clickOn("Access Tower Store");
+        clickOn("BUY HEAVY TOWER");
+        clickOn("CONFIRM");
+        Thread.sleep(1000);
+        clickOn("Access Tower Store");
+        clickOn("BUY HEAVY TOWER");
+        clickOn("CONFIRM");
+        Thread.sleep(1000);
+        clickOn("Access Tower Store");
+        clickOn("BUY HEAVY TOWER");
+        clickOn("CONFIRM");
+        Thread.sleep(1000);
+        clickOn("Access Tower Store");
+        clickOn("BUY LIGHT TOWER");
+        clickOn("CONFIRM");
+        Thread.sleep(60000);
+        clickOn("Start New Game");
+        verifyThat("Welcome to Tower Defense!", NodeMatchers.isNotNull());
+    }
 
 }

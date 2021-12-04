@@ -79,7 +79,7 @@ public class GameScreen {
         GridPane plots = new GridPane();
         ArrayList<Tower> towerPlots = controller.getPlayer().getTowerPlots();
             Timeline move = new Timeline(new KeyFrame(Duration.seconds(.5), ev -> {
-                if (controller.getStats().getTimePlayed() < 15) {
+                if (controller.getStats().getTimePlayed() < 50) {
                     enemyPlots.add(null);
                     reload(root, enemyPlots, controller.getPlayer().getLevel());
                 }
@@ -101,7 +101,7 @@ public class GameScreen {
         moveBoss.setCycleCount(Animation.INDEFINITE);
         controller.getStats().setTimePlayed(controller.getStats().getTimePlayed() + 0.5);
 
-        if (controller.getStats().getTimePlayed() == 15) {
+        if (controller.getStats().getTimePlayed() == 50) {
             move.stop();
             enemyPlots.clear();
             addFinalEnemy(enemyPlots, controller.getPlayer().getLevel(), root);
@@ -194,10 +194,6 @@ public class GameScreen {
                 controller.getStats().setEnemiesKilled(controller.getStats().getEnemiesKilled() + 1);
             }
         }
-        if (controller.getStats().getTimePlayed() > 15 && enemyPlots.get(0) == null) {
-            controller.win();
-        }
-
         Rectangle plot = new Rectangle(50, 50);
         plot.setFill(Color.BLUE);
         StackPane monument = new StackPane(plot);
@@ -245,6 +241,14 @@ public class GameScreen {
             this.startCombat(enemyPlots, controller.getPlayer().getLevel(), root);
             move.play();
         });
+        if (controller.getStats().getTimePlayed() > 50 && enemyPlots.get(0) == null) {
+            move.stop();
+            moveBoss.stop();
+            if (count == 0) {
+                controller.win();
+                count++;
+            }
+        }
 
         //Test for end game screen
         hbox.getChildren().addAll(start, tempEndGame);
